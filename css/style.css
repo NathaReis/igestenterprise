@@ -1,0 +1,125 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: default;
+}
+
+:root {
+    --primary: #12456e;
+    --primaryhover: #1a5a8f;
+    --pprimary: #308edb;
+    --pprimaryhover: #3a9dee;
+    --background: #e1e1e1;
+}
+
+.dark:root {
+    --background: #050505; 
+}
+
+img {
+    width: 230px;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    background: var(--background);
+}
+
+form {
+    width: 90vw;
+    width: 230px;
+    padding: 20px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 2px 2px 5px #00000057, 0 0 1px #00000041;
+    border-radius: 20px;
+    background: transparent;
+    backdrop-filter: invert(10%);
+}
+    
+fieldset {
+    width: inherit;
+    max-width: 250px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 5px;
+    border: none;
+}
+
+
+input {
+    width: inherit;
+    max-width: 235px;
+    border-top: 2px solid #797979;
+    border-right: 2px solid #dddddd;
+    border-bottom: 2px solid #dddddd;
+    border-left: 2px solid #797979;
+    outline: none;
+    padding: 5px;
+    cursor: text;
+    background: transparent;
+    backdrop-filter: invert(10%);
+}
+
+button {
+    background: var(--pprimary);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    padding: 10px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--pprimaryhover);
+    opacity: 9;
+}
+
+button.link {
+    background: transparent;
+    padding: 5px;
+    font-size: .8rem;
+    cursor: pointer;
+    margin: 5px;
+
+    a {
+        text-decoration: none;
+        color: var(--pprimary);
+        cursor: pointer;
+    }
+}
+
+button.link:hover {
+    background: var(--primaryhover);
+    opacity: .9;
+
+    a {
+        color: #fff;
+    }
+}
+
+button.primary {
+    width: 120px;
+}
+
+button.second {
+    background: transparent;
+    border: 1px solid var(--pprimary);
+    color: var(--pprimary);
+}
+
+fieldset.links, fieldset.buttons {
+    display: flex;
+}
