@@ -11,10 +11,14 @@
     --pprimary: #308edb;
     --pprimaryhover: #3a9dee;
     --background: #e1e1e1;
+    --nobackground: #050505;
+    --logoSrc: url(/assets/igest/img/lightNotFound.png);
 }
 
 .dark:root {
     --background: #050505; 
+    --nobackground: #e1e1e1;
+    --logoSrc: url(/assets/igest/img/darkNotFound.png);
 }
 
 img {
@@ -41,7 +45,18 @@ form {
     box-shadow: 2px 2px 5px #00000057, 0 0 1px #00000041;
     border-radius: 20px;
     background: transparent;
-    backdrop-filter: invert(10%);
+    backdrop-filter: blur(10px) invert(10%);
+    color: var(--nobackground);
+}
+
+.logo {
+    position: absolute;
+    top: calc(100vh / 2 - 40vh);
+    left: calc(100vw / 2 - 40vh);
+    width: 50vh;
+    height: 50vh;
+    border-radius: 20px;
+    background: var(--logoSrc);
 }
     
 fieldset {
@@ -55,6 +70,10 @@ fieldset {
     border: none;
 }
 
+legend {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
 
 input {
     width: inherit;
