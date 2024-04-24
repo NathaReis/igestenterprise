@@ -11,17 +11,18 @@
     --primary: #14213D;
     --second: #FCA311;
     --background: #E5E5E5;
-    --nobackground: #000000;
+    --nobackground: #141414;
     --white: #FFFFFF;
-    --black: #141414;
+    --black: #000000;
     --logoSrc: url(/assets/igest/img/lightNotFound.png);
 }
 
 .dark:root {
-    --background: #000000; 
-    --black: #141414;
-    --nobackground: #E5E5E5;
-    --logoSrc: url(/assets/igest/img/darkNotFound.png);
+  --primary: #219ebc;
+  --second: #ffb703;
+  --background: #141414; 
+  --nobackground: #E5E5E5;
+  --logoSrc: url(/assets/igest/img/darkNotFound.png);
 }
 
 .container {
