@@ -1,39 +1,18 @@
-* {
-    padding: 0;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    cursor: default;
-}
-
-:root {
-    --primary: #12456e;
-    --primaryhover: #1a5a8f;
-    --pprimary: #308edb;
-    --pprimaryhover: #3a9dee;
-    --background: #e1e1e1;
-    --nobackground: #050505;
-    --logoSrc: url(/assets/igest/img/lightNotFound.png);
-}
-
-.dark:root {
-    --background: #050505; 
-    --nobackground: #e1e1e1;
-    --logoSrc: url(/assets/igest/img/darkNotFound.png);
-}
-
 img {
     width: 230px;
 }
 
-.container {
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    background: var(--background);
+.logo {
+    position: absolute;
+    top: calc(100vh / 2 - 40vh);
+    left: calc(100vw / 2 - 40vh);
+    width: 50vh;
+    height: 50vh;
+    border-radius: 20px;
+    background: var(--logoSrc);
+    background-size: cover;
 }
-
+    
 form {
     width: 90vw;
     width: 230px;
@@ -49,16 +28,6 @@ form {
     color: var(--nobackground);
 }
 
-.logo {
-    position: absolute;
-    top: calc(100vh / 2 - 40vh);
-    left: calc(100vw / 2 - 40vh);
-    width: 50vh;
-    height: 50vh;
-    border-radius: 20px;
-    background: var(--logoSrc);
-}
-    
 fieldset {
     width: inherit;
     max-width: 250px;
@@ -87,13 +56,14 @@ input {
     cursor: text;
     background: transparent;
     backdrop-filter: invert(10%);
+    border-radius: 5px;
 }
 
 button {
-    background: var(--pprimary);
+    background: var(--primary);
     border: none;
     border-radius: 10px;
-    color: #fff;
+    color: var(--white);
     font-size: 1rem;
     outline: none;
     padding: 10px;
@@ -102,7 +72,7 @@ button {
 }
 
 button:hover {
-    background: var(--pprimaryhover);
+    background: var(--black);
     opacity: 9;
 }
 
@@ -112,20 +82,18 @@ button.link {
     font-size: .8rem;
     cursor: pointer;
     margin: 5px;
-
     a {
         text-decoration: none;
-        color: var(--pprimary);
+        color: var(--primary);
         cursor: pointer;
     }
 }
 
 button.link:hover {
-    background: var(--primaryhover);
     opacity: .9;
 
     a {
-        color: #fff;
+        color: var(--black);
     }
 }
 
@@ -135,8 +103,14 @@ button.primary {
 
 button.second {
     background: transparent;
-    border: 1px solid var(--pprimary);
-    color: var(--pprimary);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+button.second:hover {
+    background: var(--black);
+    border: 1px solid var(--black);
+    color: var(--white);
 }
 
 fieldset.links, fieldset.buttons {
