@@ -83,10 +83,12 @@
   input {
     width: 150px;
     border: none;
+    outline: none;
     background: none;
     backdrop-filter: none;
     height: 10px;
     font-size: 1rem;
+    cursor: text;
   }
 }
 
