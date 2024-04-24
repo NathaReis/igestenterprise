@@ -23,7 +23,7 @@
                 <button type="button" class="link">
                     <a href="#">Esqueci a senha</a>
                 </button>
-                <button type="submit" class="link">
+                <button type="button" class="link" onclick="cadastrar()">
                     <a href="#">Cadastrar</a>
                 </button>
             </fieldset>
@@ -34,7 +34,12 @@
         </form>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+    <script src="./service/firebase_init.js"></script>
     <script src="./js/global.js"></script>
+    <script src="./service/auth.js"></script>
     <script src="./js/script.js"></script>
 </body>
 </html>
