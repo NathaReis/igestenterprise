@@ -33,8 +33,68 @@
     background: var(--background);
 }
 
+/* Show Message */
+.showMessageBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+}
+
+.dialogBox {
+  width: 80vw;
+  max-width: 300px;
+  min-height: 100px;
+  max-height: 200px;
+  background: var(--white);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 5px #0003, 0 0 10px #0003, 2px 2px 5px #0002;
+
+  h1 {
+    font-size: 1.5rem;
+    margin: 5px 0 10px;
+  }
+
+  p {
+    font-size: .9rem;
+  }
+
+  .inputBox {
+    background: var(--second);
+    border: 2px dashed var(--black);
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    justify-content: space-between;
+
+    svg {
+      cursor: pointer;
+
+      path {
+        cursor: pointer;
+      }
+    }
+  }
+
+  input {
+    width: 150px;
+    border: none;
+    background: none;
+    backdrop-filter: none;
+    height: 10px;
+    font-size: 1rem;
+  }
+}
+
+
+/* Loading */
 .loadingBox {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     display: grid;
@@ -318,6 +378,37 @@
 
 
 /* Global */
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.centerTop {
+  padding: 5px 0;
+  display: flex;
+  align-items: top;
+  justify-content: center;
+}
+.leftTop {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+.rightTop {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.leftBottom {
+  position: absolute;
+  left: 5px;
+  Bottom: 5px;
+}
+.rightBottom {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
 .hidden {
-    display: none;
+  display: none;
 }
