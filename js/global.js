@@ -39,11 +39,6 @@ showMessage.classList.add("showMessageBox")
 showMessage.classList.add("hidden")
 $corpo.appendChild(showMessage)
 let typeAux // Para o type da mensagem com timer não influenciar o do dialog que ficará
-    
-const closeMessage = (dialog, box) => {
-    dialog.remove()
-    box.classList.add("hidden")
-}
 
 const createMessage = (title,message,type,position,timer,placeholder) => {
 
@@ -136,8 +131,7 @@ const createMessage = (title,message,type,position,timer,placeholder) => {
             svgInput.onclick = () => {
                 if(input.value.replace(/\s/g, "")) {
                     if(!contemNumeros(input.value)) {
-                        resolve(input.value);
-                        // localStorage.setItem("inputDialog", input.value)
+                        closeMessage(input.value)
                     }
                     else {
                         dialog.showAlertMessage("Cadastro","Nome inválido!","rightTop",3000)
@@ -154,14 +148,19 @@ const createMessage = (title,message,type,position,timer,placeholder) => {
     
         $showMessageBox.appendChild(dialogBox)// Add dialog in the message box
 
+        const closeMessage = (valor=false) => {
+            dialogBox.remove()
+            $showMessageBox.classList.add("hidden")
+            resolve(valor)
+        }
         $showMessageBox.addEventListener("click", event => {
             if(event.target === $showMessageBox && type !== "input") {
-                closeMessage(dialogBox, $showMessageBox)
+                closeMessage()
             }// Fechar normalmente quando o tipo não for input
         })// Fechar message ao clicar fora da caixa de dialogo
         $showMessageBox.addEventListener("dblclick", event => {
             if(event.target === $showMessageBox && type === "input") {
-                closeMessage(dialogBox, $showMessageBox)
+                closeMessage()
             }// Fechar com dblclick quando o tipo for input
         })// Fechar message ao clicar fora da caixa de dialogo
         if(timer) {
