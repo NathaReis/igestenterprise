@@ -10,16 +10,20 @@
 :root {
     --primary: #14213D;
     --second: #FCA311;
+    --secondTransparent: rgba(253, 163, 18, 0.5);
     --background: #E5E5E5;
     --nobackground: #141414;
     --white: #FFFFFF;
     --black: #000000;
+    --black2: #0e0f11;
+    --red: #c22828;
     --logoSrc: url(../assets/igest/img/lightNotFound.png);
 }
 
 .dark:root {
-  --primary: #219ebc;
+  --primary: #203869;
   --second: #ffb703;
+  --secondTransparent: #ffb80373;
   --background: #141414; 
   --nobackground: #E5E5E5;
   --logoSrc: url(../assets/igest/img/darkNotFound.png);
@@ -32,6 +36,119 @@
     align-items: center;
     justify-content: center;
     background: var(--background);
+}
+
+/* Header */
+nav {
+  background: var(--white);
+  color: var(--black);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, .1);
+}
+
+nav ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+nav li {
+  height: 50px;
+}
+
+nav a {
+  height: 100%;
+  padding: 0 30px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: var(--black2);
+  cursor: pointer;
+}
+
+nav a:hover {
+  background: var(--background);
+  color: var(--nobackground);
+}
+
+nav a:hover > svg {
+  fill: var(--nobackground);
+  cursor: pointer;
+  path {
+    cursor: pointer;
+  }
+}
+
+nav li:first-child {
+  margin-right: auto;
+  font-size: 1.3rem;
+  letter-spacing: 3px;
+}
+
+nav li:last-child {
+  display: none;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 250px;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.308);
+  backdrop-filter: blur(10px);
+  box-shadow: -10px 0 10px rgba(0, 0, 0, .1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.sidebar li {
+  width: 100%;
+}
+
+.sidebar li:first-child {
+  width: 100%;
+  height: 250px;
+  background: var(--secondTransparent);
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  display: grid;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    fill: var(--black2);
+    width: 70px;
+  }
+
+  p, h1 {
+    color: var(--red);
+  }
+}
+
+.sidebar a {
+  width: 100%;
+}
+
+@media(max-width: 800px) {
+
+  nav li:last-child {
+    display: block;
+  }
+
+  .hideOnMobile {
+    display: none;
+  }
+}
+
+@media(max-width: 400px) {
+  .sidebar {
+    width: 100%;
+  }
 }
 
 /* Show Message */

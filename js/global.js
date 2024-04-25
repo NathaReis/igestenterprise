@@ -33,6 +33,12 @@ const loading = (active=true) => {
     }
 }
 
+/* Hamburguer */
+const showSidebar = () => {
+    const $sidebar = document.querySelector(".sidebar")
+    $sidebar.classList.toggle("hidden")        
+}
+
 //Messages Error Firebase
 const messageFirebase = (msg) => {
     switch(msg) {

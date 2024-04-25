@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,46 @@
     <title>Home</title>
 </head>
 <body>
-    <button onclick="logout()">Logout</button>
+    <nav>
+        <ul class="sidebar hidden">
+            <li>
+                <svg xmlns="http://www.w3.org/2000/svg"  class="bi bi-calendar2-heart" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm2 .5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V4a.5.5 0 0 0-.5-.5zm5 4.493c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
+                </svg>
+                <div class="message">
+                    <h1>Igest</h1>
+                    <p>Sempre pela sua organização</p>                    
+                </div>
+            </li>
+            <li onclick=showSidebar()>
+                <a href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                    </svg>
+                </a>
+            </li>
+            <li><a href="#">Calendário</a></li>
+            <li><a href="#">Produtos</a></li>
+            <li><a href="#">Configurar</a></li>
+            <li><a href="#">Membros</a></li>
+            <li><a href="#" onclick=logout()>Sair</a></li>
+        </ul>
+        <ul>
+            <li><a href="/pages/home.html">Igest</a></li>
+            <li class="hideOnMobile"><a href="#">Calendário</a></li>
+            <li class="hideOnMobile"><a href="#">Produtos</a></li>
+            <li class="hideOnMobile"><a href="#">Configurar</a></li>
+            <li class="hideOnMobile"><a href="#">Membros</a></li>
+            <li class="hideOnMobile" onclick=logout()><a href="#">Sair</a></li>
+            <li onclick=showSidebar()>
+                <a href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
     <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
