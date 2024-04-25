@@ -14,7 +14,7 @@
     --nobackground: #141414;
     --white: #FFFFFF;
     --black: #000000;
-    --logoSrc: url(/assets/igest/img/lightNotFound.png);
+    --logoSrc: url(../assets/igest/img/lightNotFound.png);
 }
 
 .dark:root {
@@ -22,7 +22,7 @@
   --second: #ffb703;
   --background: #141414; 
   --nobackground: #E5E5E5;
-  --logoSrc: url(/assets/igest/img/darkNotFound.png);
+  --logoSrc: url(../assets/igest/img/darkNotFound.png);
 }
 
 .container {

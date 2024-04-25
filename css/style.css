@@ -58,6 +58,7 @@ input {
     background: transparent;
     backdrop-filter: invert(10%);
     border-radius: 5px;
+    color: var(--nobackground);
 }
 
 label {

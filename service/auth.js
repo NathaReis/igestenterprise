@@ -8,13 +8,13 @@ auth.onAuthStateChanged((user) => {
     if (user && fileName == "index.html") {
         // O usuário está logado
         setTimeout(() => {
-            location = "/pages/home.html"
+            location = "./pages/home.html"
         }, 1500)// Esperar para o usuário ser add ao firestore
     }// Se logado e na tela de login
     else if(!user && fileName != "index.html"){
         // O usuário não está logado 
         document.querySelector("body").innerHTML = ""
-        location = "/index.html"
+        location = "../index.html"
     }// Se não logado e fora da tela de login
 });
 
