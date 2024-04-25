@@ -68,7 +68,7 @@ let typeAux // Para o type da mensagem com timer não influenciar o do dialog qu
 
 const createMessage = (title,message,type,position,timer,float,placeholder) => {
 
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         // Definindo a message box
         const $showMessageBox = document.querySelector(".showMessageBox")
         if(!float) {
@@ -141,6 +141,7 @@ const createMessage = (title,message,type,position,timer,float,placeholder) => {
         // Criando input
     
         if(type == "input") {
+            loading()
             let contemNumeros = (str) => {
                 return /\d/.test(str);
             }
@@ -152,6 +153,7 @@ const createMessage = (title,message,type,position,timer,float,placeholder) => {
             const input = document.createElement("input")
             input.type = "text"
             input.placeholder = placeholder
+            input.focus()
             inputBox.appendChild(input)
     
             const svgInput = document.createElement("p")
@@ -183,7 +185,6 @@ const createMessage = (title,message,type,position,timer,float,placeholder) => {
         }// Add dialog in the message box or in the body
 
         const closeMessage = () => {
-            resolve(false)
             dialogBox.remove()
             $showMessageBox.classList.add("hidden")
         }

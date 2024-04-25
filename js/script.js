@@ -20,19 +20,14 @@ const cadastrar = async () => {
     if(!$email.value.replace(/\s/g, "") || !$password.value.replace(/\s/g, "")) {
         dialog.showAlertMessage("Cadastro", "Campo vazio!", "rightTop", true, 1500)
     }
-    else {
-        loading()
-        
+    else {        
         const name = await dialog.showInputMessage("Cadastro", "Digite seu nome:", "center", "Nome")
         createUser($email.value,$password.value,name)
-        .then(res => {
-            
-        })// Cadastro ok
+        .then(res => console.log(res))// Cadastro ok
         .catch(error => {
             $form.reset()
             messageFirebase(error)
         })// Cadastro erro
-        .finally(() => loading(false))
     }// Valida se campos estão vazios
 }// Cadastrar
 

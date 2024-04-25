@@ -7,11 +7,14 @@ auth.onAuthStateChanged((user) => {
 
     if (user && fileName == "index.html") {
         // O usuário está logado
-        //location = "/pages/home.html"
+        setTimeout(() => {
+            location = "/pages/home.html"
+        }, 1500)// Esperar para o usuário ser add ao firestore
     }// Se logado e na tela de login
     else if(!user && fileName != "index.html"){
         // O usuário não está logado 
-        //location = "/index.html"
+        document.querySelector("body").innerHTML = ""
+        location = "/index.html"
     }// Se não logado e fora da tela de login
 });
 
@@ -22,8 +25,12 @@ const createUser = (email,password,name) => {
             firebase.firestore().collection('user').doc(credential.user.uid).set({
                 name: name,
             })
-            .then(result => resolve(result))
-            .catch(error => reject(error.code))
+            .then(() => 
+                resolve(true)
+            )
+            .catch(error => 
+                reject(error.code)
+            )
         }) 
         .catch(error => {
             reject(error.code)
@@ -45,9 +52,18 @@ const loginUser = (email,password) => {
 
 const logoutUser = () => {
     return new Promise((resolve, reject) => {
+        loading()
         auth.signOut()
-        .then(res => resolve(res))
-        .catch(error => reject(error.code))
+        .then(res => {
+                resolve(res)
+                loading(false)
+            })
+        .catch(error => {
+                reject(error.code)
+                loading(false)
+            }
+        )
+        
     })
 }// Logout User
 
