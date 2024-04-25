@@ -34,9 +34,28 @@ const loading = (active=true) => {
 }
 
 //Messages Error Firebase
-const messageErrorFormat = (msg) => {
+const messageFirebase = (msg) => {
     switch(msg) {
-        
+        case 'auth/invalid-email':
+            dialog.showErrorMessage("Cadastro", "Email inválido!","rightTop",true,3000)
+            break 
+        case 'auth/weak-password':
+            dialog.showErrorMessage("Cadastro", "Senha curta! Mínimo 6 dígitos.","rightTop",true,3000)
+            break    
+        case 'auth/network-request-failed':
+            dialog.showErrorMessage("Cadastro", "Falha na conexão com a internet!","rightTop",true,3200)
+            break    
+        case 'auth/email-already-in-use':
+            dialog.showErrorMessage("Cadastro", "Esse email já está em uso!","center")
+            break    
+        case 'auth/invalid-credential':
+            dialog.showErrorMessage("Login", "Senha incorreta!","rightTop",true,3000)
+            break    
+        case 'auth/missing-email':
+            dialog.showErrorMessage("Senha", "Email ausente! Digite um email por favor.","center")
+            break    
+        default:
+            dialog.showErrorMessage("ERRO", msg,"center")   
     }
 }
                 
@@ -47,12 +66,14 @@ showMessage.classList.add("hidden")
 $corpo.appendChild(showMessage)
 let typeAux // Para o type da mensagem com timer não influenciar o do dialog que ficará
 
-const createMessage = (title,message,type,position,timer,placeholder) => {
+const createMessage = (title,message,type,position,timer,float,placeholder) => {
 
     return new Promise((resolve) => {
         // Definindo a message box
         const $showMessageBox = document.querySelector(".showMessageBox")
-        $showMessageBox.classList.remove("hidden")
+        if(!float) {
+            $showMessageBox.classList.remove("hidden")
+        }
         
         // Tipos de icones
         const errorSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#bb0b0b" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg>`
@@ -138,14 +159,15 @@ const createMessage = (title,message,type,position,timer,placeholder) => {
             svgInput.onclick = () => {
                 if(input.value.replace(/\s/g, "")) {
                     if(!contemNumeros(input.value)) {
-                        closeMessage(input.value)
+                        resolve(input.value)
+                        closeMessage()
                     }
                     else {
-                        dialog.showAlertMessage("Cadastro","Nome inválido!","rightTop",3000)
+                        dialog.showAlertMessage("Cadastro","Nome inválido!","rightTop",true,3000)
                     }// Valida se o texto contem numero
                 }
                 else {
-                    dialog.showAlertMessage("Cadastro","Texto não reconhecido!","rightTop",3000)
+                    dialog.showAlertMessage("Cadastro","Texto não reconhecido!","rightTop",true,3000)
                 }// Valida se o input está vazio
             }
             inputBox.appendChild(svgInput)
@@ -153,12 +175,17 @@ const createMessage = (title,message,type,position,timer,placeholder) => {
             dialogBox.appendChild(inputBox)  
         }
     
-        $showMessageBox.appendChild(dialogBox)// Add dialog in the message box
+        if(float) {
+            $corpo.appendChild(dialogBox)
+        }
+        else {
+            $showMessageBox.appendChild(dialogBox)
+        }// Add dialog in the message box or in the body
 
-        const closeMessage = (valor=false) => {
+        const closeMessage = () => {
+            resolve(false)
             dialogBox.remove()
             $showMessageBox.classList.add("hidden")
-            resolve(valor)
         }
         $showMessageBox.addEventListener("click", event => {
             if(event.target === $showMessageBox && type !== "input") {
@@ -184,9 +211,9 @@ const createMessage = (title,message,type,position,timer,placeholder) => {
 
 // Método para chamar as caixas de dialogo
 const dialog = {
-    showErrorMessage: (title="",message="",position="",timer=0,type="error") => createMessage(title,message,type,position,timer),
-    showInfoMessage: (title="",message="",position="",timer=0,type="info") => createMessage(title,message,type,position,timer),
-    showAlertMessage: (title="",message="",position="",timer=0,type="alert") => createMessage(title,message,type,position,timer),
-    showSuccessMessage: (title="",message="",position="",timer=0,type="success") => createMessage(title,message,type,position,timer),
-    showInputMessage: (title="",message="",position="",placeholder="",timer=0,type="input") => createMessage(title,message,type,position,timer,placeholder),
+    showErrorMessage: (title="",message="",position="",float=false,timer=0,type="error") => createMessage(title,message,type,position,timer,float),
+    showInfoMessage: (title="",message="",position="",float=false,timer=0,type="info") => createMessage(title,message,type,position,timer,float),
+    showAlertMessage: (title="",message="",position="",float=false,timer=0,type="alert") => createMessage(title,message,type,position,timer,float),
+    showSuccessMessage: (title="",message="",position="",float=false,timer=0,type="success") => createMessage(title,message,type,position,timer,float),
+    showInputMessage: (title="",message="",position="",placeholder="",float=false,timer=0,type="input") => createMessage(title,message,type,position,timer,float,placeholder),
 }
