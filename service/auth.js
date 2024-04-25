@@ -8,4 +8,7 @@ const createUser = async (email,password,name) => {
     .then(result => {
         return result;
     })
+    .catch(error => {
+        console.log(error.code)
+    })
 }

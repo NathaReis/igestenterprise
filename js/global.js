@@ -32,6 +32,13 @@ const loading = (active=true) => {
         $loading.classList.add("hidden")
     }
 }
+
+//Messages Error Firebase
+const messageErrorFormat = (msg) => {
+    switch(msg) {
+        
+    }
+}
                 
 //showMessage
 const showMessage = document.createElement("div")
