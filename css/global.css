@@ -42,7 +42,7 @@
   width: 100vw;
   height: 100vh;
   z-index: 1000;
-  background: #14141496;
+  background: #14213d94;
 }
 
 .dialogBox {
@@ -68,9 +68,8 @@
     background: var(--second);
     border: 2px dashed var(--black);
     margin: 10px 0;
-    padding: 10px;
     border-radius: 10px;
-    justify-content: space-between;
+    justify-content: space-evenly;
 
     svg {
       cursor: pointer;
@@ -82,13 +81,14 @@
   }
 
   input {
-    width: 150px;
+    width: 100%;
+    padding: 10px;
     border: none;
     outline: none;
     background: none;
     backdrop-filter: none;
     height: 10px;
-    font-size: 1rem;
+    font-size: 1.2rem;
     cursor: text;
   }
 }

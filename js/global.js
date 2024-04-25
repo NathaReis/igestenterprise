@@ -141,7 +141,6 @@ const createMessage = (title,message,type,position,timer,float,placeholder) => {
         // Criando input
     
         if(type == "input") {
-            loading()
             let contemNumeros = (str) => {
                 return /\d/.test(str);
             }
@@ -153,7 +152,6 @@ const createMessage = (title,message,type,position,timer,float,placeholder) => {
             const input = document.createElement("input")
             input.type = "text"
             input.placeholder = placeholder
-            input.focus()
             inputBox.appendChild(input)
     
             const svgInput = document.createElement("p")
