@@ -59,13 +59,13 @@
 .card {
   padding: 20px;
   border-radius: 10px;
-  background: var(--nobackground);
+  background: var(--background);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   z-index: 100;
-  color: var(--background);
+  color: var(--nobackground);
   box-shadow: 0 0 10px #0005;
 }
 

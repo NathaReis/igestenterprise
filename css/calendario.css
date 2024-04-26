@@ -38,30 +38,40 @@
 .day {
     width: 40px;
     height: 40px;
+    margin: 2px;
+    border-radius: 5px;
     display: grid;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 1px #000;
-    cursor: pointer; 
-    margin: 2px;
-    border-radius: 5px;
+    background: var(--primary);
+    color: var(--white);
 }
 
 .day:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.Day {
     background: var(--background);
     color: var(--nobackground);
+    box-shadow: 0 0 1px #000;
+    cursor: pointer;
 }
 
-.notDay {
-    opacity: .4;
-    background: var(--primary);
-    color: var(--whithe);
-    cursor: default;
+.Day:hover {
+    background: var(--nobackground);
+    color: var(--background);
 }
 
-.notDay:hover {
-    background: var(--primary);
-    color: var(--whithe);
+.currentDay {
+    background: var(--second);
+    color: var(--background);  
+}
+
+.currentDay:hover {
+    background: var(--secondTransparent);
+    color: var(--nobackground);  
 }
 
 .grid {
@@ -76,6 +86,7 @@
     text-align: center;
 
     h1 {
+        color: var(--nobackground);
         font-size: 1.5rem;
     }
     h2 {
