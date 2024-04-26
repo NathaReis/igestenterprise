@@ -9,6 +9,7 @@
 
 :root {
     --primary: #14213D;
+    --primaryTransparent: #14213d94;
     --second: #FCA311;
     --secondTransparent: rgba(253, 163, 18, 0.5);
     --background: #E5E5E5;
@@ -30,16 +31,85 @@
 }
 
 .container {
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    background: var(--background);
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  background: url(../assets/tela.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.container::before {
+  position: absolute;
+  content: '';
+  top: 70px;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 70px);
+  background: rgba(0, 0, 0, 0.473);
+  backdrop-filter: sepia(30%);
+  z-index: 0;
+}
+
+/* Card */
+.card {
+  padding: 20px;
+  border-radius: 10px;
+  background: var(--nobackground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  z-index: 100;
+  color: var(--background);
+  box-shadow: 0 0 10px #0005;
+}
+
+.card-element {
+  svg {
+    width: 30px;
+    cursor: pointer;
+
+    path {
+      cursor: pointer;
+    }
+  }
+  fill: var(--primary);
+}
+
+.inputBox {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  
+  input {
+    position: relative;
+    color: var(--primary);
+    margin-right: auto;
+    padding: 10px;
+    border-radius: 10px 0 0 10px;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: text;
+    font-size: 1.2rem;
+    width: 170px;
+  }
 }
 
 /* Header */
 nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
   background: var(--white);
   color: var(--black);
   box-shadow: 3px 3px 5px rgba(0, 0, 0, .1);
@@ -54,7 +124,7 @@ nav ul {
 }
 
 nav li {
-  height: 50px;
+  height: 70px;
 }
 
 nav a {
@@ -81,6 +151,7 @@ nav a:hover > svg {
 }
 
 nav li:first-child {
+  position: relative;
   margin-right: auto;
   font-size: 1.3rem;
   letter-spacing: 3px;
@@ -151,6 +222,15 @@ nav li:last-child {
   }
 }
 
+.bodySider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100vw - 250px);
+  height: 100vh;
+  cursor: pointer;
+}
+
 /* Show Message */
 .showMessageBox {
   position: absolute;
@@ -159,7 +239,7 @@ nav li:last-child {
   width: 100vw;
   height: 100vh;
   z-index: 1000;
-  background: #14213d94;
+  background: var(--primaryTransparent);
 }
 
 .dialogBox {
@@ -222,7 +302,7 @@ nav li:last-child {
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    background: #14213d94;
+    background: var(--primaryTransparent);
 }
 .wheel-and-hamster {
     --dur: 1s;

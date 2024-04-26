@@ -1,3 +1,16 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    background: var(--background);
+}
+
+.container::before {
+    display: none;
+}
+
 img {
     width: 230px;
 }

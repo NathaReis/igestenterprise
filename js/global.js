@@ -36,7 +36,9 @@ const loading = (active=true) => {
 /* Hamburguer */
 const showSidebar = () => {
     const $sidebar = document.querySelector(".sidebar")
+    const $bodySider = document.querySelector(".bodySider")
     $sidebar.classList.toggle("hidden")        
+    $bodySider.classList.toggle("hidden")        
 }
 
 //Messages Error Firebase
@@ -221,4 +223,9 @@ const dialog = {
     showAlertMessage: (title="",message="",position="",float=false,timer=0,type="alert") => createMessage(title,message,type,position,timer,float),
     showSuccessMessage: (title="",message="",position="",float=false,timer=0,type="success") => createMessage(title,message,type,position,timer,float),
     showInputMessage: (title="",message="",position="",placeholder="",float=false,timer=0,type="input") => createMessage(title,message,type,position,timer,float,placeholder),
+}
+
+// Logout 
+const logout = () => {
+    logoutUser()
 }

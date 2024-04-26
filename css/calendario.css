@@ -1,0 +1,85 @@
+.box {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 70px);
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.daysName {
+    width: 280px;
+    ul {
+        width: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        list-style: none;
+    }
+
+    li {
+        color: var(--primary);
+    }
+}
+
+.calendarioBox {
+    width: 280px;
+    height: 200px;
+    box-shadow: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    color: var(--nobackground);
+    gap: 0;
+}
+
+.day {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 1px #000;
+    cursor: pointer; 
+    margin: 2px;
+    border-radius: 5px;
+}
+
+.day:hover {
+    background: var(--background);
+    color: var(--nobackground);
+}
+
+.notDay {
+    opacity: .4;
+    background: var(--primary);
+    color: var(--whithe);
+    cursor: default;
+}
+
+.notDay:hover {
+    background: var(--primary);
+    color: var(--whithe);
+}
+
+.grid {
+    display: grid;
+}
+
+.space {
+    justify-content: space-around;
+}
+
+.card-element {
+    text-align: center;
+
+    h1 {
+        font-size: 1.5rem;
+    }
+    h2 {
+        font-size: 1.2rem;
+        color: var(--primary);
+    }
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/calendario.css">
+    <link rel="shortcut icon" href="../assets/igest/img/darkNotFound.png" type="image/x-icon">
+    <title>Calendário</title>
+</head>
+<body>
+
+    <div class="container">
+        <nav>
+            <div class="bodySider hidden" onclick=showSidebar()></div>
+            <ul class="sidebar hidden">
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg"  class="bi bi-calendar2-heart" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm2 .5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V4a.5.5 0 0 0-.5-.5zm5 4.493c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
+                    </svg>
+                    <div class="message">
+                        <h1>Igest Calendário</h1>
+                        <br>
+                        <p>Sempre pela <br> Sua organização</p>                    
+                    </div>
+                </li>
+                <li onclick=showSidebar()>
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li><a href="/pages/calendario.html">Calendário</a></li>
+                <li><a href="/pages/produtos.html">Produtos</a></li>
+                <li><a href="/pages/configurar.html">Configurar</a></li>
+                <li><a href="/pages/membros.html">Membros</a></li>
+                <li><a href="#" onclick=logout()>Sair</a></li>
+            </ul>
+            <ul>
+                <li><a href="/pages/home.html">Igest Calendário</a></li>
+                <li class="hideOnMobile"><a href="/pages/calendario.html">Calendário</a></li>
+                <li class="hideOnMobile"><a href="/pages/produtos.html">Produtos</a></li>
+                <li class="hideOnMobile"><a href="/pages/configurar.html">Configurar</a></li>
+                <li class="hideOnMobile"><a href="/pages/membros.html">Membros</a></li>
+                <li class="hideOnMobile" onclick=logout()><a href="#">Sair</a></li>
+                <li onclick=showSidebar()>
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="box">
+            <div class="card">
+                <div class="card-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                    </svg>
+                </div>
+                <div class="card-element">
+                    <div class="inputBox">
+                        <input type="date">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card grid">
+                <div class="card space">
+                    <div class="card-element">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+                        </svg>
+                    </div>
+                    <div class="card-element">
+                        <h1>2024</h1>
+                        <h2>Abril</h2>
+                    </div>
+                    <div class="card-element">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="daysName">
+                        <ul>
+                            <li>Dom</li>
+                            <li>Seg</li>
+                            <li>Ter</li>
+                            <li>Qua</li>
+                            <li>Qui</li>
+                            <li>Sex</li>
+                            <li>Sáb</li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="card calendarioBox">
+                    <div class="day" id="1">day</div>
+                    <div class="day" id="2">day</div>
+                    <div class="day" id="3">day</div>
+                    <div class="day" id="4">day</div>
+                    <div class="day" id="5">day</div>
+                    <div class="day" id="6">day</div>
+                    <div class="day" id="7">day</div>
+                    <div class="day" id="8">day</div>
+                    <div class="day" id="9">day</div>
+                    <div class="day" id="10">day</div>
+                    <div class="day" id="11">day</div>
+                    <div class="day" id="12">day</div>
+                    <div class="day" id="13">day</div>
+                    <div class="day" id="14">day</div>
+                    <div class="day" id="15">day</div>
+                    <div class="day" id="16">day</div>
+                    <div class="day" id="17">day</div>
+                    <div class="day" id="18">day</div>
+                    <div class="day" id="19">day</div>
+                    <div class="day" id="20">day</div>
+                    <div class="day" id="21">day</div>
+                    <div class="day" id="22">day</div>
+                    <div class="day" id="23">day</div>
+                    <div class="day" id="24">day</div>
+                    <div class="day" id="25">day</div>
+                    <div class="day" id="26">day</div>
+                    <div class="day" id="27">day</div>
+                    <div class="day" id="28">day</div>
+                    <div class="day" id="29">day</div>
+                    <div class="day" id="30">day</div>
+                    <div class="day" id="31">day</div>
+                    <div class="day" id="32">day</div>
+                    <div class="day" id="33">day</div>
+                    <div class="day" id="34">day</div>
+                    <div class="day" id="35">day</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+    <script src="../service/firebase_init.js"></script>
+    <script src="../js/global.js"></script>
+    <script src="../service/auth.js"></script>
+</body>
+</html>
