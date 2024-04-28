@@ -229,6 +229,9 @@ nav li:last-child {
   width: calc(100vw - 250px);
   height: 100vh;
   cursor: pointer;
+  background: #0001;
+  backdrop-filter: blur(5px);
+  z-index: 999;
 }
 
 /* Show Message */
