@@ -9,7 +9,55 @@
     justify-content: center;
 }
 
+.select-date {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+
+    h1, h2 {
+        cursor: pointer;
+    }
+}
+
+.select-date:hover {
+    background: var(--gray);
+}
+
+.selectBox {
+    position: absolute;
+    z-index: 100;
+    width: 250px;
+    top: 10px;
+    /* metade da tela - metade da largura - metade do padding */
+    left: calc(100vw / 2 - 250px / 2 - 20px / 2);
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.data {
+    width: 160px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    p {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+    }
+}
+
 .daysName {
+    position: relative;
     width: 280px;
     ul {
         width: inherit;
