@@ -94,7 +94,7 @@ const backMonth = () => {
 }
 
 const nextMonth = () => {
-    if(yearCurrent <= nowYear) {
+    if(yearCurrent < nowYear + 2) {
         monthCurrent++
     }
     if(monthCurrent == 12) {
