@@ -13,19 +13,23 @@
     --second: #FCA311;
     --secondTransparent: rgba(253, 163, 18, 0.5);
     --background: #E5E5E5;
+    --backgroundTransparent: #e5e5e569;
     --nobackground: #141414;
     --white: #FFFFFF;
     --black: #000000;
     --black2: #0e0f11;
     --red: #c22828;
+    --gray: #dbdbdb;
     --logoSrc: url(../assets/igest/img/lightNotFound.png);
 }
 
 .dark:root {
   --primary: #203869;
+  --red: #d33d3d;
   --second: #ffb703;
-  --secondTransparent: #ffb80373;
+  --secondTransparent: hsla(43, 100%, 70%, 0.76);
   --background: #141414; 
+  --backgroundTransparent: #14141469; 
   --nobackground: #E5E5E5;
   --logoSrc: url(../assets/igest/img/darkNotFound.png);
 }
@@ -110,8 +114,8 @@ nav {
   top: 0;
   left: 0;
   width: 100vw;
-  background: var(--white);
-  color: var(--black);
+  background: var(--background);
+  color: var(--nobackground);
   box-shadow: 3px 3px 5px rgba(0, 0, 0, .1);
 }
 
@@ -133,8 +137,12 @@ nav a {
   text-decoration: none;
   display: flex;
   align-items: center;
-  color: var(--black2);
+  color: var(--nobackground);
   cursor: pointer;
+}
+
+nav a svg {
+  fill: var(--nobackground);
 }
 
 nav a:hover {
@@ -143,7 +151,6 @@ nav a:hover {
 }
 
 nav a:hover > svg {
-  fill: var(--nobackground);
   cursor: pointer;
   path {
     cursor: pointer;
@@ -168,7 +175,7 @@ nav li:last-child {
   height: 100vh;
   width: 250px;
   z-index: 999;
-  background: rgba(255, 255, 255, 0.308);
+  background: var(--backgroundTransparent);
   backdrop-filter: blur(10px);
   box-shadow: -10px 0 10px rgba(0, 0, 0, .1);
   display: flex;
