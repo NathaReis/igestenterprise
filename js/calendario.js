@@ -94,8 +94,11 @@ const backMonth = () => {
 }
 
 const nextMonth = () => {
-    monthCurrent++
+    if(yearCurrent <= nowYear) {
+        monthCurrent++
+    }
     if(monthCurrent == 12) {
+        // Limitar ao ano atual
         monthCurrent = 0
         yearCurrent++
     }// Se o mês for 12 receber valor de janeiro e aumentar o ano
@@ -134,7 +137,7 @@ function resetSelect() {
     clearClassMonthSelect() // Limpar a classe de todos os p
 }
 
-const validClicksNext = () => {
+function validClicksNext() {
     if(clicksNextSelectDate == 0) {
         $nextSelect.classList.add("disabled")
     }   
@@ -143,7 +146,7 @@ const validClicksNext = () => {
     }
 }
 
-const fillDataSelect = () => {
+function fillDataSelect () {
     for(pos in yearsList) {
         $dataSelect[pos].innerHTML = twoNumbers(yearsList[pos])
     }// Passa pela lista dos anos e adiciona o valor deles a  sua posição na tela
