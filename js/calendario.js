@@ -84,20 +84,13 @@ const getDates = () => {
 }
 getDates()
 
-const setDates = () => {
-    const dates = new Date()
-    dates.setFullYear(yearCurrent)
-    dates.setMonth(monthCurrent)
-    getDates()
-}
-
 const backMonth = () => {
     monthCurrent--
     if(monthCurrent == -1) {
         monthCurrent = 11
         yearCurrent--
-    }
-    setDates()
+    }// Se o mês for negativo, receber valor de dezembro e diminuir o ano
+    getDates()
 }
 
 const nextMonth = () => {
@@ -105,14 +98,13 @@ const nextMonth = () => {
     if(monthCurrent == 12) {
         monthCurrent = 0
         yearCurrent++
-    }
-    setDates()
+    }// Se o mês for 12 receber valor de janeiro e aumentar o ano
+    getDates()
 }
 
 
 
 // Select Date
-
 const selectedDate = {
     year: 0,
     month: 0
@@ -120,50 +112,7 @@ const selectedDate = {
 const $nextSelect = document.querySelector("#nextSelect")
 const $backSelect = document.querySelector("#backSelect")
 let yearsList = []
-let clicksNextSelectDate = 0 // Inicia em zero
-
-const validClicksNext = () => {
-    if(clicksNextSelectDate == 0) {
-        $nextSelect.classList.add("disabled")
-    }   
-    else {
-        $nextSelect.classList.remove("disabled")
-    }
-}
-
-const fillDataSelect = () => {
-    for(pos in yearsList) {
-        $dataSelect[pos].innerHTML = twoNumbers(yearsList[pos])
-    }
-    validClicksNext()
-}
-fillDataSelect()
-
-
-// Navegação
-const backSelect = () => {
-    if(selectedDate.year == 0) {
-        yearsList = yearsList.map(element => {
-            let res = +element - 12
-            if(res < 0) {
-                res = 0
-            }
-            return res
-        })
-        clicksNextSelectDate++ // Soma cada click disponível para voltar com o next
-        fillDataSelect()
-    }// Seta só utilizável enquanto o ano ainda não foi escolhido
-}
-
-const nextSelect = () => {
-    if(selectedDate.year == 0) {
-        if(clicksNextSelectDate != 0) {
-            yearsList = yearsList.map(element => +element + 12)
-            clicksNextSelectDate-- // Diminui a qtd de clicks disponíveis para clicar em next
-            fillDataSelect()
-        }// Se 0 clicks não pode clicar
-    }// Seta só utilizável enquanto o ano ainda não foi escolhido
-}
+let clicksNextSelectDate = 0 // Qtd de clicks para usar o nextSelect
 
 function resetYearList() {
     yearsList = []
@@ -171,7 +120,7 @@ function resetYearList() {
     for(let i = 11; i >= 0; i--) {
         yearsList.unshift(+yearCurrentSelect)
         yearCurrentSelect--
-    }// Preenchendo array inicial com os anos
+    }// Preenchendo array inicial com os anos, de trás para frente (unshift)
     fillDataSelect()
 }
 resetYearList()
@@ -185,11 +134,48 @@ function resetSelect() {
     clearClassMonthSelect() // Limpar a classe de todos os p
 }
 
+const validClicksNext = () => {
+    if(clicksNextSelectDate == 0) {
+        $nextSelect.classList.add("disabled")
+    }   
+    else {
+        $nextSelect.classList.remove("disabled")
+    }
+}
+
+const fillDataSelect = () => {
+    for(pos in yearsList) {
+        $dataSelect[pos].innerHTML = twoNumbers(yearsList[pos])
+    }// Passa pela lista dos anos e adiciona o valor deles a  sua posição na tela
+    validClicksNext()
+}
+fillDataSelect()
+
+const backSelect = () => {
+    if(selectedDate.year == 0) {
+        yearsList = yearsList.map(element => {
+            let res = +element - 12
+            return res < 0 ? 0 : res
+        })
+        clicksNextSelectDate++ // Soma cada click disponível para voltar com o next
+        fillDataSelect()// Atualiza a array list de anos
+    }// Seta só utilizável enquanto o ano ainda não foi escolhido
+}
+
+const nextSelect = () => {
+    if(selectedDate.year == 0) {
+        if(clicksNextSelectDate != 0) {
+            yearsList = yearsList.map(element => +element + 12)
+            clicksNextSelectDate-- // Diminui a qtd de clicks disponíveis para clicar em next
+            fillDataSelect()
+        }// Se 0 clicks não pode clicar
+    }// Seta só utilizável enquanto o ano ainda não foi escolhido
+}
+
 function toggleSelectDate() {
     const $selectDate = document.querySelector(".selectBox")
     $selectDate.classList.toggle("hidden")
-
-    // Resets
+    // Resets for close or open
     resetYearList()
     resetSelect()
 }
@@ -214,17 +200,18 @@ $dataSelect.forEach(element => {
     element.onclick = () => {
         if(selectedDate.year == 0) {
             const $h1YearSelected = document.querySelector("#yearSelectedInfo")
-            selectedDate.year = +element.innerHTML // Salva o valor na variável
+            selectedDate.year = +element.innerHTML
             $h1YearSelected.innerHTML = element.innerHTML
-            findSelectMonths()// Busca o nome dos meses
-            $nextSelect.classList.add("disabled") // Desabilita as setas
+            findSelectMonths()
+            // Desabilita as setas
+            $nextSelect.classList.add("disabled") 
             $backSelect.classList.add("disabled")
         }// Click no ano, pois o valor ainda é 0
         else {
-            clearClassMonthSelect() // Limpar a classe de todos os meses
-            selectedDate.month = +element.id // Salvar dados na variável
-            markSelectedMonth() // Marcar o mês
-            $btnFindSelectedDate.disabled = false // Buscar btn habilitado
+            clearClassMonthSelect()
+            selectedDate.month = +element.id
+            markSelectedMonth()
+            $btnFindSelectedDate.disabled = false
         }// Click no mês, pois já tenho o ano
     }
 })
