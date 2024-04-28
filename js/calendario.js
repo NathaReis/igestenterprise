@@ -1,6 +1,7 @@
 const $daysPosition = document.querySelectorAll(".day") 
 const $year = document.querySelector("#year")
 const $month = document.querySelector("#month")
+const $dataSelect = document.querySelectorAll(".data p")
 const nowMonth = new Date().getMonth()
 const nowYear = new Date().getFullYear()
 let yearCurrent = new Date().getFullYear()
@@ -20,7 +21,6 @@ const numberDays = (set=0) => {
     const auxMonth = monthCurrent + set
     let days
     if(auxMonth <= 6 && auxMonth != 1) {
-        console.log(auxMonth)
         days = auxMonth % 2 == 0 ? 31 : 30
     }// Padrão de dias até julho
     else if(leapYear && auxMonth == 1) {
@@ -71,7 +71,7 @@ const getDates = () => {
     $daysPosition.forEach(day => {
         if(+day.id - countLast >= data.days) {
             countNext++
-            day.innerHTML = countNext
+            day.innerHTML = twoNumbers(countNext)
             day.classList.remove("Day")
         }
     })// Next days
@@ -106,4 +106,61 @@ const nextMonth = () => {
         yearCurrent++
     }
     setDates()
+}
+
+let yearsList = []
+let yearCurrentSelect = yearCurrent.toString().slice(2,4)
+for(let i = 11; i >= 0; i--) {
+    yearsList.unshift(+yearCurrentSelect)
+    yearCurrentSelect--
+}// Preenchendo array inicial com os anos
+
+let clicksNextSelectDate = 0 // Inicia em zero
+const toggleSelectDate = () => {
+    const $selectDate = document.querySelector(".selectBox")
+    $selectDate.classList.toggle("hidden")
+}
+
+const validClicksNext = () => {
+    const $nextSelect = document.querySelector("#nextSelect")
+    if(clicksNextSelectDate == 0) {
+        $nextSelect.classList.add("disabled")
+    }   
+    else {
+        $nextSelect.classList.remove("disabled")
+    }
+}
+
+const fillDataSelect = () => {
+    for(pos in yearsList) {
+        $dataSelect[pos].innerHTML = twoNumbers(yearsList[pos])
+    }
+    validClicksNext()
+}
+fillDataSelect()
+
+const backSelect = () => {
+    yearsList = yearsList.map(element => {
+        let res = element - 12
+        if(res < 0) {
+            res += 100
+        }
+        return res
+    })
+    clicksNextSelectDate++ // Soma cada click disponível para voltar com o next
+    fillDataSelect()
+}
+
+const nextSelect = () => {
+    if(clicksNextSelectDate != 0) {
+        yearsList = yearsList.map(element => {
+            let res = element + 12
+            if(res > 99) {
+                res -= 100
+            }
+            return res
+        })
+        clicksNextSelectDate-- // Diminui a qtd de clicks disponíveis para clicar em next
+        fillDataSelect()
+    }// Se 0 clicks não pode clicar
 }

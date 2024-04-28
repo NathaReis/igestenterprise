@@ -19,13 +19,14 @@
     --black: #000000;
     --black2: #0e0f11;
     --red: #c22828;
-    --gray: #dbdbdb;
+    --gray: #c5c5c5;
     --logoSrc: url(../assets/igest/img/lightNotFound.png);
 }
 
 .dark:root {
   --primary: #203869;
   --red: #d33d3d;
+  --gray: #636363;
   --second: #ffb703;
   --secondTransparent: hsla(43, 100%, 70%, 0.76);
   --background: #141414; 
@@ -75,6 +76,16 @@ button {
 button:hover {
   background: var(--black);
   opacity: 9;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .7;
+}
+
+button:disabled:hover {
+  background: var(--primary);
+  opacity: .7;
 }
 
 button.link {
@@ -129,6 +140,10 @@ fieldset.links, fieldset.buttons {
   gap: 10px;
   color: var(--nobackground);
   box-shadow: 0 0 10px #0005;
+
+  p, h1, h2 {
+    color: var(--nobackground);
+  }
 }
 
 .card-element {
@@ -141,6 +156,10 @@ fieldset.links, fieldset.buttons {
     }
   }
   fill: var(--primary);
+}
+
+.card-element svg:hover {
+  fill: var(--nobackground);
 }
 
 .inputBox {
@@ -680,4 +699,16 @@ nav li:last-child {
 }
 .hidden {
   display: none;
+}
+.disabled {
+  cursor: not-allowed;
+  opacity: .7;
+
+  svg {
+    cursor: not-allowed;
+  }
+
+  path {
+    cursor: not-allowed;
+  }
 }

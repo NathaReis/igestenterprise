@@ -261,3 +261,14 @@ const monthNumberForMonthName = (month) => {
             return "Not Found"
     }
 }
+
+// Dois números 0num se menor que 10
+const twoNumbers = (num) => {
+    if(num < 10 && num >= 0) {
+        return `0${num}`
+    }
+    else if(num > -10 && num < 0) {
+        return `-0${num*-1}`
+    }
+    return num
+}
