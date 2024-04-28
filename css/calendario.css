@@ -15,7 +15,7 @@
         width: inherit;
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
         list-style: none;
     }
 
@@ -26,11 +26,11 @@
 
 .calendarioBox {
     width: 280px;
-    height: 200px;
+    height: 240px;
     box-shadow: none;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
     color: var(--nobackground);
     gap: 0;
 }
@@ -43,20 +43,41 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    background: var(--primary);
-    color: var(--white);
+    background: var(--background);
+    color: var(--nobackground);
+    opacity: .7;
 }
 
-.day:hover {
-    background: var(--primary);
-    color: var(--white);
+.grid {
+    display: grid;
+}
+
+@media(max-width: 400px) {
+    .daysName {
+        width: calc(70px * 3.5);
+    }
+    
+    .calendarioBox {
+        width: calc(70px * 3.5);
+        height: calc(6 * 35px);
+    }
+    
+    .day {
+        width: 35px;
+        height: 35px;
+        margin: 0px;
+        border-radius: 0px;
+    }
+
+    .card {
+        padding: 10px;
+    }
 }
 
 .Day {
-    background: var(--background);
-    color: var(--nobackground);
-    box-shadow: 0 0 1px #000;
+    opacity: 1;
     cursor: pointer;
+    box-shadow: 0 0 1px #000;
 }
 
 .Day:hover {
@@ -66,17 +87,15 @@
 
 .currentDay {
     background: var(--second);
-    color: var(--background);  
+    color: var(--black2);  
+    box-shadow: none;
 }
 
 .currentDay:hover {
     background: var(--secondTransparent);
-    color: var(--nobackground);  
+    color: var(--black2);  
 }
 
-.grid {
-    display: grid;
-}
 
 .space {
     justify-content: space-around;

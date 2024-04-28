@@ -1,13 +1,37 @@
 const $daysPosition = document.querySelectorAll(".day") 
 const $year = document.querySelector("#year")
 const $month = document.querySelector("#month")
-const yearCurrent = new Date().getFullYear()
-const monthCurrent = new Date().getMonth()
 const nowMonth = new Date().getMonth()
 const nowYear = new Date().getFullYear()
+let yearCurrent = new Date().getFullYear()
+let monthCurrent = new Date().getMonth()
+
+const clearClassDays = () => {
+    $daysPosition.forEach(day => {
+        day.classList.remove("Day")
+        day.classList.remove("currentDay")
+        day.innerHTML = 'day'
+    })
+}
 
 const numberDaysMonth = () => {
-    const days = new Date(yearCurrent, monthCurrent, 0).getDate()
+    const lastTwoNumbersYear = yearCurrent.toString().slice(2,4)
+    const leapYear = lastTwoNumbersYear % 4 == 0
+    let days
+    if(monthCurrent <= 6 && monthCurrent != 1) {
+        console.log(monthCurrent)
+        days = monthCurrent % 2 == 0 ? 31 : 30
+    }// Padrão de dias até julho
+    else if(leapYear && monthCurrent == 1) {
+        days = 29
+    }// Padrão de dias fevereiro ano bissesto
+    else if(monthCurrent == 1){
+        days = 28
+    }// Padrão de dias fevereiro 
+    else if(monthCurrent > 6){
+        days = monthCurrent % 2 != 0 ? 31 : 30
+    }// Padrão de dias após julho
+    // Quando começa o primeiro dia do mês
     const primaryDay = new Date(yearCurrent, monthCurrent, 1).getDay()
     return {
         days: days,
@@ -16,30 +40,60 @@ const numberDaysMonth = () => {
 }
 
 const getDates = () => {
+    clearClassDays()
     $year.innerHTML = yearCurrent
     $month.innerHTML = monthNumberForMonthName(monthCurrent)
-
     if(yearCurrent == nowYear && monthCurrent == nowMonth) {
         const nowDay = new Date().getDate()
         $daysPosition[nowDay].classList.add("currentDay")
     }
-
+    
     const data = numberDaysMonth()
-    let count = 1
+    let count = 0
     let countLast = 0
-    for(let i = 0; i < 35; i++) {
-        if(i >= data.primaryDay && i < data.days) {
-            $daysPosition[i].classList.add("Day")
-            $daysPosition[i].innerHTML = count - countLast
-        }
-        else if(i < data.primaryDay) {
+    let countNext = 0
+    $daysPosition.forEach(day => {
+        if(+day.id < data.primaryDay) {
             countLast++
-            $daysPosition[i].innerHTML = count 
-        }
+            day.innerHTML = +day.id + 1
+        }// Last days
         else {
-            $daysPosition[i].innerHTML = count - data.days// Contagem total menos dia máximo
-        }// Dias após o fim do mês
-        count++
-    }
+            count++
+            day.innerHTML = count
+            day.classList.add("Day")
+        }// days
+    })
+    $daysPosition.forEach(day => {
+        if(+day.id - countLast >= data.days) {
+            countNext++
+            day.innerHTML = countNext
+            day.classList.remove("Day")
+        }
+    })// Nest days
 }
 getDates()
+
+const setDates = () => {
+    const dates = new Date()
+    dates.setFullYear(yearCurrent)
+    dates.setMonth(monthCurrent)
+    getDates()
+}
+
+const backMonth = () => {
+    monthCurrent--
+    if(monthCurrent == -1) {
+        monthCurrent = 11
+        yearCurrent--
+    }
+    setDates()
+}
+
+const nextMonth = () => {
+    monthCurrent++
+    if(monthCurrent == 12) {
+        monthCurrent = 0
+        yearCurrent++
+    }
+    setDates()
+}
