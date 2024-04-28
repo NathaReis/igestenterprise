@@ -2,6 +2,7 @@ const $daysPosition = document.querySelectorAll(".day")
 const $year = document.querySelector("#year")
 const $month = document.querySelector("#month")
 const $dataSelect = document.querySelectorAll(".data p")
+const $btnFindSelectedDate = document.querySelector("#btnFindSelectedDate")
 const nowMonth = new Date().getMonth()
 const nowYear = new Date().getFullYear()
 let yearCurrent = new Date().getFullYear()
@@ -108,21 +109,20 @@ const nextMonth = () => {
     setDates()
 }
 
-let yearsList = []
-let yearCurrentSelect = yearCurrent.toString().slice(2,4)
-for(let i = 11; i >= 0; i--) {
-    yearsList.unshift(+yearCurrentSelect)
-    yearCurrentSelect--
-}// Preenchendo array inicial com os anos
 
-let clicksNextSelectDate = 0 // Inicia em zero
-const toggleSelectDate = () => {
-    const $selectDate = document.querySelector(".selectBox")
-    $selectDate.classList.toggle("hidden")
+
+// Select Date
+
+const selectedDate = {
+    year: 0,
+    month: 0
 }
+const $nextSelect = document.querySelector("#nextSelect")
+const $backSelect = document.querySelector("#backSelect")
+let yearsList = []
+let clicksNextSelectDate = 0 // Inicia em zero
 
 const validClicksNext = () => {
-    const $nextSelect = document.querySelector("#nextSelect")
     if(clicksNextSelectDate == 0) {
         $nextSelect.classList.add("disabled")
     }   
@@ -139,28 +139,106 @@ const fillDataSelect = () => {
 }
 fillDataSelect()
 
-const backSelect = () => {
-    yearsList = yearsList.map(element => {
-        let res = element - 12
-        if(res < 0) {
-            res += 100
-        }
-        return res
-    })
-    clicksNextSelectDate++ // Soma cada click disponível para voltar com o next
-    fillDataSelect()
-}
 
-const nextSelect = () => {
-    if(clicksNextSelectDate != 0) {
+// Navegação
+const backSelect = () => {
+    if(selectedDate.year == 0) {
         yearsList = yearsList.map(element => {
-            let res = element + 12
-            if(res > 99) {
-                res -= 100
+            let res = +element - 12
+            if(res < 0) {
+                res = 0
             }
             return res
         })
-        clicksNextSelectDate-- // Diminui a qtd de clicks disponíveis para clicar em next
+        clicksNextSelectDate++ // Soma cada click disponível para voltar com o next
         fillDataSelect()
-    }// Se 0 clicks não pode clicar
+    }// Seta só utilizável enquanto o ano ainda não foi escolhido
+}
+
+const nextSelect = () => {
+    if(selectedDate.year == 0) {
+        if(clicksNextSelectDate != 0) {
+            yearsList = yearsList.map(element => +element + 12)
+            clicksNextSelectDate-- // Diminui a qtd de clicks disponíveis para clicar em next
+            fillDataSelect()
+        }// Se 0 clicks não pode clicar
+    }// Seta só utilizável enquanto o ano ainda não foi escolhido
+}
+
+function resetYearList() {
+    yearsList = []
+    let yearCurrentSelect = nowYear
+    for(let i = 11; i >= 0; i--) {
+        yearsList.unshift(+yearCurrentSelect)
+        yearCurrentSelect--
+    }// Preenchendo array inicial com os anos
+    fillDataSelect()
+}
+resetYearList()
+
+function resetSelect() {
+    $btnFindSelectedDate.disabled = true
+    selectedDate.year = 0
+    selectedDate.month = ''
+    $nextSelect.classList.add("disabled")
+    $backSelect.classList.remove("disabled")
+    clearClassMonthSelect() // Limpar a classe de todos os p
+}
+
+function toggleSelectDate() {
+    const $selectDate = document.querySelector(".selectBox")
+    $selectDate.classList.toggle("hidden")
+
+    // Resets
+    resetYearList()
+    resetSelect()
+}
+
+// Click on the year of the date selection
+function clearClassMonthSelect() {
+    $dataSelect.forEach(month => {
+        month.classList.remove("selectedDate")
+    })
+}
+function markSelectedMonth() {
+    $dataSelect.forEach(month => {
+        if(month.id == selectedDate.month) {
+            month.classList.add("selectedDate")
+        }
+        else {
+            month.classList.remove("selectedDate")
+        }
+    })
+}
+$dataSelect.forEach(element => {
+    element.onclick = () => {
+        if(selectedDate.year == 0) {
+            const $h1YearSelected = document.querySelector("#yearSelectedInfo")
+            selectedDate.year = +element.innerHTML // Salva o valor na variável
+            $h1YearSelected.innerHTML = element.innerHTML
+            findSelectMonths()// Busca o nome dos meses
+            $nextSelect.classList.add("disabled") // Desabilita as setas
+            $backSelect.classList.add("disabled")
+        }// Click no ano, pois o valor ainda é 0
+        else {
+            clearClassMonthSelect() // Limpar a classe de todos os meses
+            selectedDate.month = +element.id // Salvar dados na variável
+            markSelectedMonth() // Marcar o mês
+            $btnFindSelectedDate.disabled = false // Buscar btn habilitado
+        }// Click no mês, pois já tenho o ano
+    }
+})
+
+function findDate() {
+    yearCurrent = selectedDate.year
+    monthCurrent = selectedDate.month
+    getDates()
+    toggleSelectDate()
+}
+
+// Select Month
+function findSelectMonths() {
+    for(pos in $dataSelect) {
+        $dataSelect[pos].innerHTML = monthNumberForMonthName(+pos).toString().slice(0,3)
+    }
 }

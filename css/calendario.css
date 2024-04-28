@@ -34,6 +34,7 @@
     display: grid;
     align-items: center;
     justify-content: center;
+    padding: 10px;
 }
 
 .select {
@@ -47,6 +48,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    margin: 0 10px 0 10px;
 
     p {
         display: grid;
@@ -54,12 +56,20 @@
         justify-content: center;
         width: 40px;
         height: 40px;
+        cursor: pointer;
+        box-shadow: 0 0 1px var(--nobackground);
+        font-size: .8rem;
     }
-}
 
-.selectedDate {
-    background: var(--nobackground);
-    color: var(--background);
+    p:hover {
+        background: var(--nobackground);
+        color: var(--background);
+    }
+
+    .selectedDate {
+        background: var(--nobackground);
+        color: var(--background);
+    }
 }
 
 .daysName {
