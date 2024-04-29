@@ -5,6 +5,11 @@
     font-family: Arial, Helvetica, sans-serif;
     cursor: default;
     color: var(--black);
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 0;
 }
 
 :root {
@@ -41,7 +46,7 @@
   display: grid;
   align-items: center;
   justify-content: center;
-  background: url(../assets/tela.jpg);
+  background: url(../assets/tela1000.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -71,6 +76,10 @@ button {
   padding: 10px;
   transition: .3s;
   cursor: pointer;
+
+  svg {
+    fill: var(--white);
+  }
 }
 
 button:hover {
@@ -126,7 +135,9 @@ button.second:hover {
 }
 
 fieldset.links, fieldset.buttons {
+  border: none;
   display: flex;
+  gap: 10px;
 }
 
 /* Card */
@@ -187,13 +198,14 @@ fieldset.links, fieldset.buttons {
 
 /* Header */
 nav {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   background: var(--background);
   color: var(--nobackground);
   box-shadow: 3px 3px 5px rgba(0, 0, 0, .1);
+  z-index: 1;
 }
 
 nav ul {

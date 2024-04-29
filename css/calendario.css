@@ -1,7 +1,5 @@
 .box {
-    position: absolute;
-    top: 70px;
-    left: 0;
+    position: relative;
     width: 100vw;
     height: calc(100vh - 70px);
     display: grid;
@@ -113,6 +111,7 @@
 
 .grid {
     display: grid;
+    text-align: center;
 }
 
 .Day {
@@ -181,6 +180,43 @@
         font-size: 1.2rem;
         color: var(--primary);
     }
+}
+
+.transparent {
+    background: transparent;
+}
+
+.listBox {
+    background: transparent;
+    backdrop-filter: blur(2px);
+    width: 80vw;
+    max-width: 300px;
+    height: 40vh;
+    max-height: 40vh;
+    overflow: hidden auto;
+}
+
+.listBox::-webkit-scrollbar {
+    width: 20px;
+    background: var(--primaryTransparent);
+}
+
+.listBox::-webkit-scrollbar-thumb {
+    width: 20px;
+    background: var(--primaryTransparent);
+}
+
+.listBox::-webkit-scrollbar-button {
+    width: 20px;
+    background: var(--background);
+}
+
+.listBox .card {
+    width: 170px;
+}
+
+.eventData {
+    margin: 5px 0 5px;
 }
 
 .hidden {

@@ -145,9 +145,35 @@ const createMessage = (title,message,type,position,timer,float,placeholder) => {
         const dialogMessage = document.createElement("p")
         dialogMessage.innerHTML = message
         dialogBox.appendChild(dialogMessage)
+
+        // Criando buttons
+        if(type == "confirm") {
+            const buttons = document.createElement("fieldset")
+            buttons.classList.add("buttons")
+
+            const yes = document.createElement("button")
+            yes.innerHTML = "Sim"
+            yes.type = "button"
+            yes.classList.add("primary")
+            yes.onclick = () => {
+                resolve()
+                closeMessage()
+            }
+            buttons.appendChild(yes)
+            
+            const no = document.createElement("button")
+            no.innerHTML = "Não"
+            no.type = "button"
+            no.classList.add("second")
+            no.onclick = () => {
+                reject()
+                closeMessage()
+            }
+            buttons.appendChild(no)
+            dialogBox.appendChild(buttons)
+        }
     
         // Criando input
-    
         if(type == "input") {
             let contemNumeros = (str) => {
                 return /\d/.test(str);
@@ -222,6 +248,7 @@ const dialog = {
     showInfoMessage: (title="",message="",position="",float=false,timer=0,type="info") => createMessage(title,message,type,position,timer,float),
     showAlertMessage: (title="",message="",position="",float=false,timer=0,type="alert") => createMessage(title,message,type,position,timer,float),
     showSuccessMessage: (title="",message="",position="",float=false,timer=0,type="success") => createMessage(title,message,type,position,timer,float),
+    showConfirmMessage: (title="",message="",position="",float=false,timer=0,type="confirm") => createMessage(title,message,type,position,timer,float),
     showInputMessage: (title="",message="",position="",placeholder="",float=false,timer=0,type="input") => createMessage(title,message,type,position,timer,float,placeholder),
 }
 

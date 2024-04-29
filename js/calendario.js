@@ -1,6 +1,6 @@
 const $daysPosition = document.querySelectorAll(".day") 
-const $year = document.querySelector("#year")
-const $month = document.querySelector("#month")
+const $year = document.querySelectorAll(".year")
+const $month = document.querySelectorAll(".month")
 const $dataSelect = document.querySelectorAll(".data p")
 const $btnFindSelectedDate = document.querySelector("#btnFindSelectedDate")
 const nowMonth = new Date().getMonth()
@@ -48,8 +48,8 @@ const numberDaysMonth = () => {
 
 const getDates = () => {
     clearClassDays()
-    $year.innerHTML = yearCurrent
-    $month.innerHTML = monthNumberForMonthName(monthCurrent)
+    $year.forEach(year => year.innerHTML = yearCurrent)
+    $month.forEach(month => month.innerHTML = monthNumberForMonthName(monthCurrent))
     if(yearCurrent == nowYear && monthCurrent == nowMonth) {
         const nowDay = new Date().getDate()
         $daysPosition[nowDay].classList.add("currentDay")
@@ -231,4 +231,50 @@ function findSelectMonths() {
     for(pos in $dataSelect) {
         $dataSelect[pos].innerHTML = monthNumberForMonthName(+pos).toString().slice(0,3)
     }
+}
+
+// ONCLICK DAY FOR LISTEVENTS
+const transitionPages = (page) => {  
+    const $calendario = document.querySelector("#calendario")  
+    const $listEvents = document.querySelector("#listEvents")  
+    const $form = document.querySelector("#form")  
+    $listEvents.classList.add("hidden")
+    $calendario.classList.add("hidden")        
+    $form.classList.add("hidden")        
+    if(page == '#listEvents') {
+        $listEvents.classList.remove("hidden")
+    }
+    else if(page == '#calendario') {
+        $calendario.classList.remove("hidden")
+    }
+    else if(page == '#form') {
+        $form.classList.remove("hidden")
+    }
+
+    setTimeout(() => {
+        const link = document.createElement("a")
+        link.href = page
+        link.click()
+    }, 500)
+}
+$daysPosition.forEach(day => {
+    day.onclick = () => {
+        transitionPages("#listEvents")
+    }
+})
+
+// List Events 
+const deleteEvent = () => {
+    dialog.showConfirmMessage("Exclusão","Deseja excluir o evento?","center")
+    .then(() => {
+        console.log("Excluir o evento")
+    })
+}
+
+const addEvent = () => {
+    transitionPages('#form')
+}
+
+const editEvent = () => {
+    transitionPages('#form')
 }
