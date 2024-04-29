@@ -16,6 +16,19 @@ $form.addEventListener("submit", async (event) => {
     .finally(() => loading(false))
 })// Logar
 
+// const logar = () => {
+//     loading()
+    
+//     loginUser($email.value,$password.value)
+//     .then(res => {
+//         console.log(res)
+//     })
+//     .catch(error => {
+//         messageFirebase(error)
+//     })
+//     .finally(() => loading(false))
+// }
+
 const cadastrar = async () => {
     if(!$email.value.replace(/\s/g, "") || !$password.value.replace(/\s/g, "")) {
         dialog.showAlertMessage("Cadastro", "Campo vazio!", "rightTop", true, 1500)

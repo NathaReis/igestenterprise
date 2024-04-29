@@ -164,11 +164,6 @@
     color: var(--black2);  
 }
 
-
-.space {
-    justify-content: space-around;
-}
-
 .card-element {
     text-align: center;
 
@@ -180,10 +175,6 @@
         font-size: 1.2rem;
         color: var(--primary);
     }
-}
-
-.transparent {
-    background: transparent;
 }
 
 .listBox {
@@ -212,13 +203,80 @@
 }
 
 .listBox .card {
-    width: 170px;
+    width: 200px;
 }
 
 .eventData {
     margin: 5px 0 5px;
 }
 
+/* Form */
+.formBox {
+    border: 1px solid var(--second);
+    background: var(--background);
+    color: var(--nobackground);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #0002;
+
+    legend {
+        color: var(--second);
+        font-weight: 700;
+        letter-spacing: 2px;
+        font-size: 1.3rem;
+        text-shadow: 0 0 5px #0005;
+    }
+
+    label {
+        float: left;
+        color: var(--nobackground);
+        font-weight: 600;
+    }
+
+    .campo {
+        input[type="text"], input[type="date"] {
+            width: 160px;
+            height: 45px;
+        }
+
+        svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--nobackground);
+        }
+    }
+}
+
+.campos {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .campoTime {
+        width: 75px;
+        height: 20px;
+        border: 1px solid var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 10px;
+        input {
+            font-size: 1.2rem;
+        }
+    }
+}
+
 .hidden {
     display: none;
+}
+
+.transparent {
+    background: transparent;
+}
+
+.space {
+    justify-content: space-around;
 }

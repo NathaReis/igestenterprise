@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" class="dark">
+<html lang="pt-br" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +54,7 @@
             </ul>
         </nav>
 
-        <div class="box" id="calendario">
+        <div class="box hidden" id="calendario">
             <div class="card grid">
                 <div class="card space">
                     <div class="card-element" onclick=backMonth()>
@@ -183,7 +183,7 @@
                         <h2 class="month"></h2>
                     </div>
                     <div class="card-element">
-                        <svg xmlns="http://www.w3.org/2000/svg" onclick="addEvent()" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" onclick=adicionarEvento() class="bi bi-plus-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                         </svg>
@@ -191,20 +191,20 @@
                 </div>          
                 
                 <div class="card grid listBox">
-                    <div class="card space" onclick="updateEvent()">
+                    <div class="card space" onclick="editarEvento()">
                         <div class="card-element grid eventData">
                             <h1>Name</h1>
                             <p>Departamento</p>
                         </div>
                         <div class="eventOptions">
                             <fieldset class="buttons">
-                                <button type="button" onclick=editEvent()>
+                                <button type="button" onclick=editarEvento()>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
                                     </svg>
                                 </button>
-                                <button type="button" onclick=deleteEvent()>
+                                <button type="button" onclick=deletarEvento()>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                                     </svg>
@@ -216,30 +216,53 @@
             </div>
         </div>
 
-        <div class="box hidden" id="form">
-            <div class="card grid">
-                <div class="card space">
-                    <div class="card-element" onclick="transitionPages('#listEvents')">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
-                        </svg>
-                    </div>
-                    <div class="card-element select-date">
-                        <h1 class="year"></h1>
-                        <h2 class="month"></h2>
-                    </div>
-                    <div class="card-element">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                        </svg>
-                    </div>
-                </div>   
-
-                <div class="card">
-
+        <div class="box" id="form">
+            <form>
+                <div class="card grid transparent">
+                    <div class="card space">
+                        <div class="card-element" onclick="transitionPages('#listEvents')">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+                            </svg>
+                        </div>
+                        <div class="card-element select-date">
+                            <h1 class="year"></h1>
+                            <h2 class="month"></h2>
+                        </div>
+                        <div class="card-element">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                            </svg>
+                        </div>
+                    </div>   
+    
+                    <fieldset class="formBox grid">
+                        <legend>Evento</legend>
+                        <div class="campo">
+                            <input type="text" id="eventName" placeholder="Nome" required>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3-event" viewBox="0 0 16 16">
+                                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>
+                                <path d="M12 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                            </svg>
+                        </div>
+                        <label for="end-data"">Data final</label>
+                        <div class="campo">
+                            <input type="date" id="end-data" required>
+                        </div>
+                        <label>Horário</label>
+                        <div class="campos">
+                            <div class="campoTime">
+                                <input type="time" id="start-hour" required>
+                            </div>
+                            <h1>-</h1>
+                            <div class="campoTime">
+                                <input type="time" id="end-hour" required>
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

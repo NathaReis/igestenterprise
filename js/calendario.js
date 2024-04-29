@@ -264,17 +264,17 @@ $daysPosition.forEach(day => {
 })
 
 // List Events 
-const deleteEvent = () => {
+const deletarEvento = () => {
     dialog.showConfirmMessage("Exclusão","Deseja excluir o evento?","center")
     .then(() => {
         console.log("Excluir o evento")
     })
 }
 
-const addEvent = () => {
+const adicionarEvento = () => {
     transitionPages('#form')
 }
 
-const editEvent = () => {
+const editarEvento = () => {
     transitionPages('#form')
 }
