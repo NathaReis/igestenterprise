@@ -212,7 +212,6 @@
                             </fieldset>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -282,8 +281,8 @@
                 </div>
             </form>
         </div>
-
-        <div class="box" id="escalaList">
+        
+        <div class="box hidden" id="escalaList">
             <div class="card grid">
                 <div class="card space">
                     <div class="card-element" onclick="transitionPages('#form')">
@@ -295,7 +294,7 @@
                         <h1 class="year"></h1>
                         <h2 class="month"></h2>
                     </div>
-                    <div class="card-element">
+                    <div class="card-element" onclick="transitionPages('#escalaAddList')">
                         <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-plus-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
@@ -307,6 +306,110 @@
                     <textarea id="viewListEscala" cols="30" rows="10" placeholder="Escala" readonly></textarea>
                 </div>
             </div>
+        </div>
+
+        <div class="box hidden" id="escalaAddList">
+            <div class="card grid transparent">
+                <div class="card space">
+                    <div class="card-element" onclick="transitionPages('#escalaList')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+                        </svg>
+                    </div>
+                    <div class="card-element select-date">
+                        <h1 class="year"></h1>
+                        <h2 class="month"></h2>
+                    </div>
+                    <div class="card-element" onclick="transitionPages('#escalaAdd')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                        </svg>
+                    </div>
+                </div>          
+                
+                <div class="card grid listBox">
+                    <div class="card space flex">
+                        <div class="space grid">
+                            <div class="card-element grid eventData">
+                                <h2>Name</h2>
+                                <p>Function</p>
+                                <p>Horário</p>
+                            </div>                         
+                        </div>
+                        <div class="card eventOptions">
+                            <fieldset class="buttons">
+                                <button type="button" onclick=editarEscala()>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                    </svg>
+                                </button>
+                                <button type="button" onclick=deletarEscala()>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                    </svg>
+                                </button>
+                            </fieldset>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box" id="escalaAdd">
+            <form class="topHeight">
+                <div class="card grid transparent blur">
+                    <div class="card space">
+                        <div class="card-element" onclick="transitionPages('#escalaAddList')">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+                            </svg>
+                        </div>
+                        <div class="card-element select-date">
+                            <h1 class="year"></h1>
+                            <h2 class="month"></h2>
+                        </div>
+                        <div class="card-element">
+                            <button type="submit" class="transparent eventButtonSubmit">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>   
+    
+                    <fieldset class="formBox grid">
+                        <legend>Escala</legend>
+                        <div class="campo">
+                            <input type="text" id="names-escala" placeholder="Nomes" required>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                            </svg>
+                        </div>
+                        <div class="campo">
+                            <div class="select">
+                                <input type="text" id="function-escala" required>
+                                <h2 id="select-function-escala" onclick=toggleOptionsEscala()>Selecionar</h2>
+                                <div class="options hidden" id="options-select-escala">
+                                    <div class="option escalaOption" id="">Selecionar</div>
+                                    <div class="option escalaOption" id="pregador">Pregador(a)</div>
+                                    <div class="option escalaOption" id="cantor">Cantor(a)</div>
+                                    <div class="option escalaOption" id="recpcionista">Recepcionista</div>
+                                    <div class="option escalaOption" id="sonoplasta">Sonoplasta</div>
+                                </div>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns-gap" viewBox="0 0 16 16">
+                                <path d="M6 1v3H1V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm14 12v3h-5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM6 8v7H1V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm14-6v7h-5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"/>
+                            </svg>
+                        </div>
+                        <div class="campo">
+                            <input type="time" id="escala-hour" required>
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
         </div>
     </div>
 

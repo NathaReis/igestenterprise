@@ -247,10 +247,14 @@ const transitionPages = (page) => {
     const $listEvents = document.querySelector("#listEvents")  
     const $form = document.querySelector("#form")  
     const $escalaList = document.querySelector("#escalaList")  
+    const $escalaAddList = document.querySelector("#escalaAddList")  
+    const $escalaAdd = document.querySelector("#escalaAdd")  
     $listEvents.classList.add("hidden")
     $calendario.classList.add("hidden")        
     $form.classList.add("hidden")        
     $escalaList.classList.add("hidden")        
+    $escalaAddList.classList.add("hidden")        
+    $escalaAdd.classList.add("hidden")        
     if(page == '#listEvents') {
         $listEvents.classList.remove("hidden")
     }
@@ -268,6 +272,13 @@ const transitionPages = (page) => {
     }
     else if(page == '#escalaList') {
         $escalaList.classList.remove("hidden")
+    }
+    else if(page == '#escalaAddList') {
+        $escalaAddList.classList.remove("hidden")
+        preencherLista()
+    }
+    else if(page == '#escalaAdd') {
+        $escalaAdd.classList.remove("hidden")
     }
 
     setTimeout(() => {
@@ -302,9 +313,16 @@ let form = {
     end_hour: document.querySelector("#end-hour"),
     start_hour: document.querySelector("#start-hour"),
     isPublic: document.querySelector("#isPublic"),
+    escala: []
 }
 
 // Validar data
+form.end_data.addEventListener("change", () => {
+    if(form.end_data.value < dateCurrent) {
+        form.end_data.value = dateCurrent
+        dialog.showAlertMessage("Alerta","Data de início maior que a de fim","center")
+    }
+})
 
 // Validar horário
 form.end_hour.addEventListener("change", () => {
@@ -326,6 +344,67 @@ form.start_hour.addEventListener("change", () => {
             form.start_hour.value = form.end_hour.value
             dialog.showAlertMessage("Alerta","Horário de início maior que o de fim","center")
         }
+    }
+})
+
+//Escala Add List
+function preencherLista() {
+    
+}
+
+// Escala add
+const $options = document.querySelectorAll(".escalaOption")
+const $namesEscala = document.querySelector("#names-escala")
+const $option = document.querySelector("#function-escala")
+const $retornoOption = document.querySelector("#select-function-escala")
+const $escalaHour = document.querySelector("#escala-hour")
+const $escalaAdd = document.querySelector("#escalaAdd")
+
+const resetEscalaAddComponents = () => {
+    $option.value = ""
+    $namesEscala.value = ""
+    $escalaHour.value = ""
+    $retornoOption.innerHTML = "Selecionar"
+}
+
+$escalaAdd.addEventListener("submit", (e) => {
+    e.preventDefault()
+
+    const escala = {
+        names: $namesEscala.value,
+        function: $option.value,
+        hour: $escalaHour.value,
+    }
+
+    form.escala.push(escala)
+    
+    resetEscalaAddComponents()
+
+    transitionPages("#escalaAddList")
+})
+
+// Select
+const toggleOptionsEscala = () => {
+    const $optionsBox = document.querySelector("#options-select-escala")
+    $optionsBox.classList.toggle("hidden")
+}
+$options.forEach(opt => {
+    opt.onclick = () => {
+        const inputFunctionOption = document.querySelector("#function-escala")
+        inputFunctionOption.value = opt.id
+        $retornoOption.innerHTML = opt.innerHTML
+        toggleOptionsEscala()
+    }
+})
+
+// Hora 
+$escalaHour.addEventListener("change", () => {
+    const end_hour = form.end_hour.value 
+    const start_hour = form.start_hour.value 
+
+    if($escalaHour.value > end_hour || start_hour > $escalaHour.value) {
+        $escalaHour.value = start_hour
+        dialog.showAlertMessage("Alerta","Horário fora do evento!","center")
     }
 })
 
