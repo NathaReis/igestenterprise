@@ -26,6 +26,16 @@ img {
     background-size: cover;
 }
 
+.centerTop {
+    padding: 5px 0;
+  }
+  .leftTop {
+    top: 5px;
+  }
+  .rightTop {
+    top: 5px;
+  }
+
 /* .wrapper {
     --input-focus: #2d8cf0;
     --font-color: #323232;

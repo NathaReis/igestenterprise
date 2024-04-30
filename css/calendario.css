@@ -1,3 +1,7 @@
+.container {
+    background-repeat: repeat;
+}
+
 .box {
     position: relative;
     width: 100vw;
@@ -109,11 +113,6 @@
     opacity: .5;
 }
 
-.grid {
-    display: grid;
-    text-align: center;
-}
-
 .Day {
     opacity: 1;
     cursor: pointer;
@@ -123,34 +122,6 @@
 .Day:hover {
     background: var(--nobackground);
     color: var(--background);
-}
-
-@media(max-width: 400px) {
-    .daysName {
-        width: calc(70px * 3.5);
-    }
-    
-    .calendarioBox {
-        width: calc(70px * 3.5);
-        height: calc(6 * 35px);
-    }
-    
-    .day {
-        width: 35px;
-        height: 35px;
-        margin: 0px;
-        border-radius: 0px;
-        box-shadow: none;
-    }
-
-    .Day {
-        border: none;
-        background: var(--gray);
-    }
-
-    .card {
-        padding: 10px;
-    }
 }
 
 .currentDay {
@@ -228,15 +199,32 @@
     }
 
     label {
+        text-align: left;
         float: left;
         color: var(--nobackground);
         font-weight: 600;
+        margin: 5px 0 5px 10px;
     }
 
     .campo {
         input[type="text"], input[type="date"] {
             width: 160px;
             height: 45px;
+        }
+
+        textarea {
+            width: 100%;
+            min-width: 200px;
+            max-width: 200px;
+            height: 45px;
+            min-height: 45px;
+            max-height: 45px;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: .9rem;
+            color: var(--nobackground);
+            cursor: text;
         }
 
         svg {
@@ -264,9 +252,55 @@
         border-radius: 10px;
         margin-top: 10px;
         input {
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
     }
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+.escalaBtn {
+    width: 100%;
+}
+
+.eventButtonSubmit {
+    svg {
+        fill: var(--primary);
+    }
+}
+
+.eventButtonSubmit:hover {
+    background: transparent;
+    svg {
+        fill: var(--nobackground);
+    }
+}
+
+#viewListEscala {
+    width: 220px;
+    height: 200px;
+    border-radius: inherit;
+    min-width: 220px;
+    min-height: 200px;
+    max-width: 220px;
+    max-height: 200px;
+    border: none;
+    background: transparent;
+    padding: 10px;
+    font-size: 1rem;
+    letter-spacing: .5px;
+    outline: none;
+    color: var(--nobackground);
+}
+
+.grid {
+    display: grid;
+    text-align: center;
 }
 
 .hidden {
@@ -277,6 +311,42 @@
     background: transparent;
 }
 
+.blur {
+    backdrop-filter: blur(10px);
+}
+
 .space {
     justify-content: space-around;
+}
+
+.topHeight {
+    padding-top: 10vh;
+}
+
+@media(max-width: 400px) {
+    .daysName {
+        width: calc(70px * 3.5);
+    }
+    
+    .calendarioBox {
+        width: calc(70px * 3.5);
+        height: calc(6 * 35px);
+    }
+    
+    .day {
+        width: 35px;
+        height: 35px;
+        margin: 0px;
+        border-radius: 0px;
+        box-shadow: none;
+    }
+
+    .Day {
+        border: none;
+        background: var(--gray);
+    }
+
+    .card {
+        padding: 10px;
+    }
 }

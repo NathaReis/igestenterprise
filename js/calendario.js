@@ -7,6 +7,7 @@ const nowMonth = new Date().getMonth()
 const nowYear = new Date().getFullYear()
 let yearCurrent = new Date().getFullYear()
 let monthCurrent = new Date().getMonth()
+let dateCurrent
 
 const clearClassDays = () => {
     $daysPosition.forEach(day => {
@@ -233,14 +234,23 @@ function findSelectMonths() {
     }
 }
 
+$daysPosition.forEach(day => {
+    day.onclick = () => {
+        dateCurrent = `${yearCurrent}-${twoNumbers(monthCurrent)}-${twoNumbers(+day.innerHTML)}`
+        transitionPages("#listEvents")
+    }
+})
+
 // ONCLICK DAY FOR LISTEVENTS
 const transitionPages = (page) => {  
     const $calendario = document.querySelector("#calendario")  
     const $listEvents = document.querySelector("#listEvents")  
     const $form = document.querySelector("#form")  
+    const $escalaList = document.querySelector("#escalaList")  
     $listEvents.classList.add("hidden")
     $calendario.classList.add("hidden")        
     $form.classList.add("hidden")        
+    $escalaList.classList.add("hidden")        
     if(page == '#listEvents') {
         $listEvents.classList.remove("hidden")
     }
@@ -249,6 +259,15 @@ const transitionPages = (page) => {
     }
     else if(page == '#form') {
         $form.classList.remove("hidden")
+        const $date = document.querySelector("#end-data")
+        $date.value = dateCurrent
+        if(!dateCurrent) {
+            dialog.showAlertMessage("Data inválida","Selecione uma data de início","rightTop",true,2000)
+            transitionPages("#calendario")
+        }
+    }
+    else if(page == '#escalaList') {
+        $escalaList.classList.remove("hidden")
     }
 
     setTimeout(() => {
@@ -257,11 +276,6 @@ const transitionPages = (page) => {
         link.click()
     }, 500)
 }
-$daysPosition.forEach(day => {
-    day.onclick = () => {
-        transitionPages("#listEvents")
-    }
-})
 
 // List Events 
 const deletarEvento = () => {
@@ -278,3 +292,54 @@ const adicionarEvento = () => {
 const editarEvento = () => {
     transitionPages('#form')
 }
+
+// Form Event
+const $form = document.querySelector("#form form")
+let form = {
+    name: document.querySelector("#eventName"),
+    describe: document.querySelector("#eventDescribe"),
+    end_data: document.querySelector("#end-data"),
+    end_hour: document.querySelector("#end-hour"),
+    start_hour: document.querySelector("#start-hour"),
+    isPublic: document.querySelector("#isPublic"),
+}
+
+// Validar data
+
+// Validar horário
+form.end_hour.addEventListener("change", () => {
+    const end = form.end_hour.value
+    const start = form.start_hour.value
+    if(start) {
+        if(start > end) {
+            form.end_hour.value = form.start_hour.value
+            dialog.showAlertMessage("Alerta","Horário de início maior que o de fim","center")
+        }
+    }
+})
+
+form.start_hour.addEventListener("change", () => {
+    const end = form.end_hour.value
+    const start = form.start_hour.value
+    if(end) {
+        if(start > end) {
+            form.start_hour.value = form.end_hour.value
+            dialog.showAlertMessage("Alerta","Horário de início maior que o de fim","center")
+        }
+    }
+})
+
+$form.addEventListener("submit", (e) => {
+    e.preventDefault()
+    form = {
+        name: document.querySelector("#eventName").value,
+        describe: document.querySelector("#eventDescribe").value,
+        end_data: document.querySelector("#end-data").value,
+        start_data: dateCurrent,
+        end_hour: document.querySelector("#end-hour").value,
+        start_hour: document.querySelector("#start-hour").value,
+        isPublic: document.querySelector("#isPublic").checked,
+        escala: [],
+    }
+    console.log(form)
+})

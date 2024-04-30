@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" >
+<html lang="pt-br" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -217,9 +217,9 @@
             </div>
         </div>
 
-        <div class="box" id="form">
-            <form>
-                <div class="card grid transparent">
+        <div class="box hidden" id="form">
+            <form class="topHeight">
+                <div class="card grid transparent blur">
                     <div class="card space">
                         <div class="card-element" onclick="transitionPages('#listEvents')">
                             <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
@@ -231,10 +231,12 @@
                             <h2 class="month"></h2>
                         </div>
                         <div class="card-element">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                            </svg>
+                            <button type="submit" class="transparent eventButtonSubmit">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>   
     
@@ -246,6 +248,9 @@
                                 <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>
                                 <path d="M12 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
                             </svg>
+                        </div>
+                        <div class="campo">
+                            <textarea id="eventDescribe" cols="30" rows="10" placeholder="Descrição"></textarea>
                         </div>
                         <label for="end-data"">Data final</label>
                         <div class="campo">
@@ -261,9 +266,47 @@
                                 <input type="time" id="end-hour" required>
                             </div>
                         </div>
+                        <div class="checkbox">
+                            <label class="checkbox-container">
+                                <input class="custom-checkbox" checked type="checkbox" id="isPublic">
+                                <span class="checkmark"></span>
+                            </label>
+                            <p>Evento público</p>
+                        </div>
+                        <div class="campo center">
+                            <button type="button" class="escalaBtn" onclick="transitionPages('#escalaList')">
+                                Escala
+                            </button>
+                        </div>
                     </fieldset>
                 </div>
             </form>
+        </div>
+
+        <div class="box" id="escalaList">
+            <div class="card grid">
+                <div class="card space">
+                    <div class="card-element" onclick="transitionPages('#form')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+                        </svg>
+                    </div>
+                    <div class="card-element select-date">
+                        <h1 class="year"></h1>
+                        <h2 class="month"></h2>
+                    </div>
+                    <div class="card-element">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                        </svg>
+                    </div>
+                </div>          
+                
+                <div class="card grid listBox">
+                    <textarea id="viewListEscala" cols="30" rows="10" placeholder="Escala" readonly></textarea>
+                </div>
+            </div>
         </div>
     </div>
 
