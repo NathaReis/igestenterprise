@@ -499,7 +499,7 @@ $escalaHour.addEventListener("change", () => {
 
 $formEvent.addEventListener("submit", (e) => {
     e.preventDefault()
-    form = {
+    let event = {
         name: document.querySelector("#eventName").value,
         describe: document.querySelector("#eventDescribe").value,
         end_data: document.querySelector("#end-data").value,
@@ -510,5 +510,5 @@ $formEvent.addEventListener("submit", (e) => {
         img: eventImgText,
         escala: formEvent.escala,
     }
-    console.log(form)
+    console.log(event)
 })// Salvar ou atualizar evento
