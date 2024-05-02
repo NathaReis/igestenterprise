@@ -277,11 +277,11 @@ const openPage = (page) => {
             pag.classList.remove("hidden")
         }
 
-        if(pag.id == '#form') {
+        if(pag.id == 'form') {
             const $date = document.querySelector("#end-data")
             $date.value = dateCurrent            
         }
-        else if(pag.id == '#escalaAddList') {
+        else if(pag.id == 'escalaAddList') {
             preencherLista()
         }
     })
@@ -451,7 +451,6 @@ $escalaAdd.addEventListener("submit", (e) => {
         function: $optionEscala.value,
         hour: $escalaHour.value,
     }
-
     if(isUpdateForm) {
         const newList = formEvent.escala.filter(element => element != isUpdateForm)
         newList.push(escala)
@@ -461,6 +460,7 @@ $escalaAdd.addEventListener("submit", (e) => {
         formEvent.escala.push(escala)
     }// Adiciona escala
     
+    console.log('o')
     resetEscalaAddComponents()        
     transitionPages("escalaAddList")
 })// Adicionar ou atualizar
@@ -488,8 +488,8 @@ $optionsEscala.forEach(opt => {
 })// Select de funções para a escala
 
 $escalaHour.addEventListener("change", () => {
-    const end_hour = form.end_hour.value 
-    const start_hour = form.start_hour.value 
+    const end_hour = formEvent.end_hour.value 
+    const start_hour = formEvent.start_hour.value 
 
     if($escalaHour.value > end_hour || start_hour > $escalaHour.value) {
         $escalaHour.value = start_hour
@@ -508,7 +508,7 @@ $formEvent.addEventListener("submit", (e) => {
         start_hour: document.querySelector("#start-hour").value,
         isPublic: document.querySelector("#isPublic").checked,
         img: eventImgText,
-        escala: [],
+        escala: formEvent.escala,
     }
     console.log(form)
 })// Salvar ou atualizar evento
