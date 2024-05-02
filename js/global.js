@@ -299,3 +299,21 @@ const twoNumbers = (num) => {
     }
     return num
 }
+
+// Imagem 
+const imageForText = (img) => {
+    return new Promise((resolve) => {
+        const readFile = new FileReader()
+        readFile.onload = (loadImg) => {
+            const base64 = loadImg.target.result
+            resolve(base64)
+            // textForImage(base64)
+        }
+        readFile.readAsDataURL(img)        
+    })
+}
+
+// const textForImage = (text) => {
+//     // const imgg = document.querySelector("#imgg")
+//     // imgg.src = text
+// } // É só usar o texto no src para gerar a imagem

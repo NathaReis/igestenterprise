@@ -216,7 +216,7 @@
             </div>
         </div>
 
-        <div class="box hidden" id="form">
+        <div class="box" id="form">
             <form class="topHeight">
                 <div class="card grid transparent blur">
                     <div class="card space">
@@ -241,6 +241,7 @@
     
                     <fieldset class="formBox grid">
                         <legend>Evento</legend>
+                        <label for="eventName">Nome *</label>
                         <div class="campo">
                             <input type="text" id="eventName" placeholder="Nome" required>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3-event" viewBox="0 0 16 16">
@@ -248,14 +249,15 @@
                                 <path d="M12 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
                             </svg>
                         </div>
+                        <label for="eventName">Descrição</label>
                         <div class="campo">
                             <textarea id="eventDescribe" cols="30" rows="10" placeholder="Descrição"></textarea>
                         </div>
-                        <label for="end-data"">Data final</label>
+                        <label for="end-data"">Data final *</label>
                         <div class="campo">
                             <input type="date" id="end-data" required>
                         </div>
-                        <label>Horário</label>
+                        <label>Horário *</label>
                         <div class="campos">
                             <div class="campoTime">
                                 <input type="time" id="start-hour" required>
@@ -277,6 +279,11 @@
                                 Escala
                             </button>
                         </div>
+                        <label for="eventImg">Imagem</label>
+                        <div class="campo">
+                            <input type="file" id="eventImg">
+                        </div>
+                        <img src="" id="imgg" alt="" width="200">
                     </fieldset>
                 </div>
             </form>
@@ -308,7 +315,7 @@
             </div>
         </div>
 
-        <div class="box" id="escalaAddList">
+        <div class="box hidden" id="escalaAddList">
             <div class="card grid transparent">
                 <div class="card space">
                     <div class="card-element" onclick="transitionPages('escalaList')">
