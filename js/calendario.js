@@ -1,3 +1,20 @@
+const pages = [
+    document.querySelector("#calendario"),  
+    document.querySelector("#listEvents"),  
+    document.querySelector("#form"),  
+    document.querySelector("#escalaList"),  
+    document.querySelector("#escalaAddList"),  
+    document.querySelector("#escalaAdd"),  
+]
+const formEvent = {
+    name: document.querySelector("#eventName"),
+    describe: document.querySelector("#eventDescribe"),
+    end_data: document.querySelector("#end-data"),
+    end_hour: document.querySelector("#end-hour"),
+    start_hour: document.querySelector("#start-hour"),
+    isPublic: document.querySelector("#isPublic"),
+    escala: []
+}
 const $daysPosition = document.querySelectorAll(".day") 
 const $year = document.querySelectorAll(".year")
 const $month = document.querySelectorAll(".month")
@@ -5,11 +22,24 @@ const $dataSelect = document.querySelectorAll(".data p")
 const $btnFindSelectedDate = document.querySelector("#btnFindSelectedDate")
 const nowMonth = new Date().getMonth()
 const nowYear = new Date().getFullYear()
+const selectedDate = {year: 0,month: 0}
+const $nextSelect = document.querySelector("#nextSelect")
+const $backSelect = document.querySelector("#backSelect")
+const $optionsEscala = document.querySelectorAll(".escalaOption")
+const $namesEscala = document.querySelector("#names-escala")
+const $optionEscala = document.querySelector("#function-escala")
+const $retornoOptionEscala = document.querySelector("#select-function-escala")
+const $escalaHour = document.querySelector("#escala-hour")
+const $escalaAdd = document.querySelector("#escalaAdd")
+const $formEvent = document.querySelector("#form form")
 let yearCurrent = new Date().getFullYear()
 let monthCurrent = new Date().getMonth()
 let dateCurrent
 let isUpdateForm = false
+let yearsList = []
+let clicksNextSelectDate = 0 // Qtd de clicks para usar o nextSelect
 
+// Calendar
 const clearClassDays = () => {
     $daysPosition.forEach(day => {
         day.classList.remove("Day")
@@ -96,6 +126,13 @@ const backMonth = () => {
     getDates()
 }
 
+$daysPosition.forEach(day => {
+    day.onclick = () => {
+        dateCurrent = `${yearCurrent}-${twoNumbers(monthCurrent)}-${twoNumbers(+day.innerHTML)}`
+        transitionPages("listEvents")
+    }
+})
+
 const nextMonth = () => {
     if(yearCurrent < nowYear + 2) {
         monthCurrent++
@@ -108,18 +145,7 @@ const nextMonth = () => {
     getDates()
 }
 
-
-
 // Select Date
-const selectedDate = {
-    year: 0,
-    month: 0
-}
-const $nextSelect = document.querySelector("#nextSelect")
-const $backSelect = document.querySelector("#backSelect")
-let yearsList = []
-let clicksNextSelectDate = 0 // Qtd de clicks para usar o nextSelect
-
 function resetYearList() {
     yearsList = []
     let yearCurrentSelect = nowYear
@@ -157,7 +183,7 @@ function fillDataSelect () {
 }
 fillDataSelect()
 
-const backSelect = () => {
+function backSelect() {
     if(selectedDate.year == 0) {
         yearsList = yearsList.map(element => {
             let res = +element - 12
@@ -168,7 +194,7 @@ const backSelect = () => {
     }// Seta só utilizável enquanto o ano ainda não foi escolhido
 }
 
-const nextSelect = () => {
+function nextSelect() {
     if(selectedDate.year == 0) {
         if(clicksNextSelectDate != 0) {
             yearsList = yearsList.map(element => +element + 12)
@@ -186,12 +212,12 @@ function toggleSelectDate() {
     resetSelect()
 }
 
-// Click on the year of the date selection
 function clearClassMonthSelect() {
     $dataSelect.forEach(month => {
         month.classList.remove("selectedDate")
     })
-}
+}// Click on the year of the date selection
+
 function markSelectedMonth() {
     $dataSelect.forEach(month => {
         if(month.id == selectedDate.month) {
@@ -202,13 +228,27 @@ function markSelectedMonth() {
         }
     })
 }
+
+function findDate() {
+    yearCurrent = selectedDate.year
+    monthCurrent = selectedDate.month
+    getDates()
+    toggleSelectDate()
+}
+
+function fillSelectMonth() {
+    for(pos in $dataSelect) {
+        $dataSelect[pos].innerHTML = monthNumberForMonthName(+pos).toString().slice(0,3)
+    }
+}// Fill Month
+
 $dataSelect.forEach(element => {
     element.onclick = () => {
         if(selectedDate.year == 0) {
             const $h1YearSelected = document.querySelector("#yearSelectedInfo")
             selectedDate.year = +element.innerHTML
             $h1YearSelected.innerHTML = element.innerHTML
-            findSelectMonths()
+            fillSelectMonth()
             // Desabilita as setas
             $nextSelect.classList.add("disabled") 
             $backSelect.classList.add("disabled")
@@ -220,76 +260,47 @@ $dataSelect.forEach(element => {
             $btnFindSelectedDate.disabled = false
         }// Click no mês, pois já tenho o ano
     }
-})
+})// Select year and month  cliking
 
-function findDate() {
-    yearCurrent = selectedDate.year
-    monthCurrent = selectedDate.month
-    getDates()
-    toggleSelectDate()
-}
+// Pages
+const closePages = () => {
+    pages.forEach(page => {
+        page.classList.add("hidden")
+    })
+}// Close Pages
 
-// Select Month
-function findSelectMonths() {
-    for(pos in $dataSelect) {
-        $dataSelect[pos].innerHTML = monthNumberForMonthName(+pos).toString().slice(0,3)
-    }
-}
+const openPage = (page) => {
+    pages.forEach(pag => {
+        if(pag.id == page) {
+            pag.classList.remove("hidden")
+        }
 
-$daysPosition.forEach(day => {
-    day.onclick = () => {
-        dateCurrent = `${yearCurrent}-${twoNumbers(monthCurrent)}-${twoNumbers(+day.innerHTML)}`
-        transitionPages("#listEvents")
-    }
-})
+        if(pag.id == '#form') {
+            const $date = document.querySelector("#end-data")
+            $date.value = dateCurrent            
+        }
+        else if(pag.id == '#escalaAddList') {
+            preencherLista()
+        }
+    })
+}// Open Page
 
-// ONCLICK DAY FOR LISTEVENTS
 const transitionPages = (page, update=false) => { 
     isUpdateForm = update // Para saber o que fazer ao entrar no form e finalizar 
-    const $calendario = document.querySelector("#calendario")  
-    const $listEvents = document.querySelector("#listEvents")  
-    const $form = document.querySelector("#form")  
-    const $escalaList = document.querySelector("#escalaList")  
-    const $escalaAddList = document.querySelector("#escalaAddList")  
-    const $escalaAdd = document.querySelector("#escalaAdd")  
-    $listEvents.classList.add("hidden")
-    $calendario.classList.add("hidden")        
-    $form.classList.add("hidden")        
-    $escalaList.classList.add("hidden")        
-    $escalaAddList.classList.add("hidden")        
-    $escalaAdd.classList.add("hidden")        
-    if(page == '#listEvents') {
-        $listEvents.classList.remove("hidden")
-    }
-    else if(page == '#calendario') {
-        $calendario.classList.remove("hidden")
-    }
-    else if(page == '#form') {
-        $form.classList.remove("hidden")
-        const $date = document.querySelector("#end-data")
-        $date.value = dateCurrent
-        if(!dateCurrent) {
-            dialog.showAlertMessage("Data inválida","Selecione uma data de início","rightTop",true,2000)
-            transitionPages("#calendario")
-        }
-    }
-    else if(page == '#escalaList') {
-        $escalaList.classList.remove("hidden")
-    }
-    else if(page == '#escalaAddList') {
-        $escalaAddList.classList.remove("hidden")
-        preencherLista()
-    }
-    else if(page == '#escalaAdd') {
-        $escalaAdd.classList.remove("hidden")
-    }
 
-    setTimeout(() => {
+    closePages()
+    openPage(page)
+
+    if(page != 'calendario' && !dateCurrent) {
+        dialog.showAlertMessage("Data inválida","Selecione uma data de início","rightTop",true,2000)
+        transitionPages("calendario")
+    }// Validar a data atual
+    else {
         const link = document.createElement("a")
-        link.href = page
+        link.href = `#${page}`
         link.click()
-    }, 500)
-}
+    }
+}// Transition Page
 
 // List Events 
 const deletarEvento = () => {
@@ -300,51 +311,38 @@ const deletarEvento = () => {
 }
 
 const adicionarEvento = () => {
-    transitionPages('#form')
+    transitionPages('form')
 }
 
 const editarEvento = () => {
-    transitionPages('#form')
+    transitionPages('form')
 }
 
 // Form Event
-const $form = document.querySelector("#form form")
-let form = {
-    name: document.querySelector("#eventName"),
-    describe: document.querySelector("#eventDescribe"),
-    end_data: document.querySelector("#end-data"),
-    end_hour: document.querySelector("#end-hour"),
-    start_hour: document.querySelector("#start-hour"),
-    isPublic: document.querySelector("#isPublic"),
-    escala: []
-}
-
-// Validar data
-form.end_data.addEventListener("change", () => {
-    if(form.end_data.value < dateCurrent) {
-        form.end_data.value = dateCurrent
+formEvent.end_data.addEventListener("change", () => {
+    if(formEvent.end_data.value < dateCurrent) {
+        formEvent.end_data.value = dateCurrent
         dialog.showAlertMessage("Alerta","Data de início maior que a de fim","center")
     }
-})
+})// Validar data do evento
 
-// Validar horário
-form.end_hour.addEventListener("change", () => {
-    const end = form.end_hour.value
-    const start = form.start_hour.value
+formEvent.end_hour.addEventListener("change", () => {
+    const end = formEvent.end_hour.value
+    const start = formEvent.start_hour.value
     if(start) {
         if(start > end) {
-            form.end_hour.value = form.start_hour.value
+            formEvent.end_hour.value = formEvent.start_hour.value
             dialog.showAlertMessage("Alerta","Horário de início maior que o de fim","center")
         }
     }
-})
+})// Validar horário do evento
 
-form.start_hour.addEventListener("change", () => {
-    const end = form.end_hour.value
-    const start = form.start_hour.value
+formEvent.start_hour.addEventListener("change", () => {
+    const end = formEvent.end_hour.value
+    const start = formEvent.start_hour.value
     if(end) {
         if(start > end) {
-            form.start_hour.value = form.end_hour.value
+            formEvent.start_hour.value = formEvent.end_hour.value
             dialog.showAlertMessage("Alerta","Horário de início maior que o de fim","center")
         }
     }
@@ -354,7 +352,7 @@ form.start_hour.addEventListener("change", () => {
 function preencherLista() {
     const container = document.querySelector("#listEscalaAddList")
     container.innerHTML = ""
-    for(escala of form.escala) {
+    for(escala of formEvent.escala) {
         const card = document.createElement("div")
         card.classList.add("card")
         card.classList.add("space")
@@ -393,7 +391,7 @@ function preencherLista() {
         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
         </svg>`
         edit.onclick = () => {
-            editEscala(escala)
+            editarEscala(escala)
         }
         buttons.appendChild(edit)
 
@@ -405,8 +403,8 @@ function preencherLista() {
         del.onclick = () => {
             dialog.showConfirmMessage("Exclusão","Deseja excluir o componente?","center")
             .then(() => {
-                const newList = form.escala.filter(element => element != escala)
-                form.escala = newList
+                const newList = formEvent.escala.filter(element => element != escala)
+                formEvent.escala = newList
                 preencherLista()
             })
             .catch(error => console.log(error))
@@ -421,19 +419,12 @@ function preencherLista() {
     }
 }
 
-// Escala add
-const $options = document.querySelectorAll(".escalaOption")
-const $namesEscala = document.querySelector("#names-escala")
-const $option = document.querySelector("#function-escala")
-const $retornoOption = document.querySelector("#select-function-escala")
-const $escalaHour = document.querySelector("#escala-hour")
-const $escalaAdd = document.querySelector("#escalaAdd")
-
+// Escala
 const resetEscalaAddComponents = () => {
-    $option.value = ""
+    $optionEscala.value = ""
     $namesEscala.value = ""
     $escalaHour.value = ""
-    $retornoOption.innerHTML = "Selecionar"
+    $retornoOptionEscala.innerHTML = "Selecionar"
 }
 
 $escalaAdd.addEventListener("submit", (e) => {
@@ -441,47 +432,45 @@ $escalaAdd.addEventListener("submit", (e) => {
 
     const escala = {
         names: $namesEscala.value,
-        function: $option.value,
+        function: $optionEscala.value,
         hour: $escalaHour.value,
     }
 
     if(isUpdateForm) {
-        const newList = form.escala.filter(element => element != isUpdateForm)
+        const newList = formEvent.escala.filter(element => element != isUpdateForm)
         newList.push(escala)
-        form.escala = newList
-    }
+        formEvent.escala = newList
+    }// Atualiza escala
     else {
-        form.escala.push(escala)
-    }
+        formEvent.escala.push(escala)
+    }// Adiciona escala
     
     resetEscalaAddComponents()        
-    transitionPages("#escalaAddList")
-})
+    transitionPages("escalaAddList")
+})// Adicionar ou atual
 
-// Escala update
-const editEscala = (escala) => {
-    $option.value = escala.function
+const editarEscala = (escala) => {
+    $optionEscala.value = escala.function
     $namesEscala.value = escala.names
     $escalaHour.value = escala.hour
-    $retornoOption.innerHTML = `${escala.function.toString().toUpperCase()}`
-    transitionPages("#escalaAdd", escala)
-}
+    $retornoOptionEscala.innerHTML = `${escala.function.toString().toUpperCase()}`
+    transitionPages("escalaAdd", escala)
+}// Escala update
 
-// Select
 const toggleOptionsEscala = () => {
     const $optionsBox = document.querySelector("#options-select-escala")
     $optionsBox.classList.toggle("hidden")
-}
-$options.forEach(opt => {
+}// Toggle do select de funções para escala
+
+$optionsEscala.forEach(opt => {
     opt.onclick = () => {
         const inputFunctionOption = document.querySelector("#function-escala")
         inputFunctionOption.value = opt.id
-        $retornoOption.innerHTML = opt.innerHTML
+        $retornoOptionEscala.innerHTML = opt.innerHTML
         toggleOptionsEscala()
     }
-})
+})// Select de funções para a escala
 
-// Hora 
 $escalaHour.addEventListener("change", () => {
     const end_hour = form.end_hour.value 
     const start_hour = form.start_hour.value 
@@ -490,9 +479,9 @@ $escalaHour.addEventListener("change", () => {
         $escalaHour.value = start_hour
         dialog.showAlertMessage("Alerta","Horário fora do evento!","center")
     }
-})
+})// Validar o horário da escala, se está dentro do horário do evento
 
-$form.addEventListener("submit", (e) => {
+$formEvent.addEventListener("submit", (e) => {
     e.preventDefault()
     form = {
         name: document.querySelector("#eventName").value,
@@ -505,4 +494,4 @@ $form.addEventListener("submit", (e) => {
         escala: [],
     }
     console.log(form)
-})
+})// Salvar ou atualizar evento
