@@ -33,6 +33,7 @@ const $retornoOptionEscala = document.querySelector("#select-function-escala")
 const $escalaHour = document.querySelector("#escala-hour")
 const $escalaAdd = document.querySelector("#escalaAdd")
 const $formEvent = document.querySelector("#form form")
+const $viewListEscala = document.querySelector("#viewListEscala")
 let yearCurrent = new Date().getFullYear()
 let monthCurrent = new Date().getMonth()
 let dateCurrent
@@ -284,6 +285,9 @@ const openPage = (page) => {
         else if(pag.id == 'escalaAddList') {
             preencherLista()
         }
+        else if(pag.id == 'escalaList') {
+            preencherListaEscala()
+        }
     })
 }// Open Page
 
@@ -368,6 +372,16 @@ formEvent.img.addEventListener("change", () => {
         }
     }// Se o arquivo foi selecionado
 })// Converter imagem para texto
+
+//Escala List 
+const preencherListaEscala = () => {
+    let textResponse = ''
+    formEvent.escala.forEach(element => {
+        textResponse += `${element.hour} - ${element.function}\n`
+        textResponse+= `\t${element.names}\n`
+    })
+    $viewListEscala.value = textResponse
+}
 
 //Escala Add List
 function preencherLista() {
