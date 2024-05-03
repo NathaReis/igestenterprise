@@ -54,7 +54,7 @@
             </ul>
         </nav>
 
-        <div class="box hidden" id="calendario">
+        <div class="box" id="calendario">
             <div class="card grid">
                 <div class="card space">
                     <div class="card-element" onclick=backMonth()>
@@ -216,7 +216,7 @@
             </div>
         </div>
 
-        <div class="box" id="form">
+        <div class="box hidden" id="form">
             <form class="topHeight">
                 <div class="card grid transparent blur">
                     <div class="card space">
@@ -260,11 +260,11 @@
                         <label>Horário *</label>
                         <div class="campos">
                             <div class="campoTime">
-                                <input type="time" id="start-hour" required>
+                                <input type="time" id="start-hour" required value="14:00">
                             </div>
                             <h1>-</h1>
                             <div class="campoTime">
-                                <input type="time" id="end-hour" required>
+                                <input type="time" id="end-hour" required value="23:00">
                             </div>
                         </div>
                         <div class="checkbox">

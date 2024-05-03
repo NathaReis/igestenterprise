@@ -443,6 +443,30 @@ const resetEscalaAddComponents = () => {
     $retornoOptionEscala.innerHTML = "Selecionar"
 }
 
+const orderEscala = (escala) => {
+    let newList = []
+    if(formEvent.escala.length > 0) {
+        formEvent.escala.forEach(esc => {
+            if(esc.hour <= escala.hour) {
+                formEvent.escala = formEvent.escala.filter(element => element != esc)// Elimina elemento de escala
+                newList.push(esc)// Adiciona ele á nova lista
+            }
+        })// Elementos antes da escala
+
+        newList.push(escala)
+
+        formEvent.escala.forEach(esc => {
+            if(esc.hour > escala.hour) {
+                newList.push(esc)// Adiciona ele á nova lista
+            }
+        })// Elementos após a escala
+        formEvent.escala = newList
+    }
+    else {
+        formEvent.escala.push(escala)
+    }
+}
+
 $escalaAdd.addEventListener("submit", (e) => {
     e.preventDefault()
 
@@ -452,15 +476,13 @@ $escalaAdd.addEventListener("submit", (e) => {
         hour: $escalaHour.value,
     }
     if(isUpdateForm) {
-        const newList = formEvent.escala.filter(element => element != isUpdateForm)
-        newList.push(escala)
-        formEvent.escala = newList
+        const pos = formEvent.escala.indexOf(isUpdateForm)
+        formEvent.escala[pos] = escala
     }// Atualiza escala
     else {
-        formEvent.escala.push(escala)
+        orderEscala(escala)
     }// Adiciona escala
-    
-    console.log('o')
+
     resetEscalaAddComponents()        
     transitionPages("escalaAddList")
 })// Adicionar ou atualizar
