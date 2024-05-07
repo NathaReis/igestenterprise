@@ -2,7 +2,8 @@
 
 ## Escala
 
-Mostrar a escala completa no textarea
+Mostrar a escala completa no textarea ok
+Apensa o autor, doxologia e comunicação visualizam a escala completa, os demais visualizam e editam somente a sua parte correspondente
 
 ## Evento
 
